@@ -24,7 +24,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "pnpm exec eslint --fix"
+      "pnpm lint --"
     ],
     "*.{css,scss}": [
       "pnpm prettier --write"
