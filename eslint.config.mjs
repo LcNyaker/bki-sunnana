@@ -29,6 +29,7 @@ const eslintConfig = [
         },
       ],
     },
+    extends: ['next/core-web-vitals', 'plugin:prettier/recommended'],
   },
   {
     ignores: ['.next/'],
