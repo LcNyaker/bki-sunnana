@@ -2,8 +2,13 @@ name: CI
 
 on:
   push:
-    branches: [developer]
+    branches:
+      - develop
+      - main
   pull_request:
+    branches:
+      - develop
+      - main
 
 jobs:
   build:
@@ -22,16 +27,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Install dependencies
-        working-directory: bki-sunnana
         run: pnpm install
 
       - name: Lint
-        working-directory: bki-sunnana
         run: pnpm lint
 
       - name: Build
-        working-directory: bki-sunnana
         run: pnpm build
