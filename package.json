@@ -22,14 +22,6 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
     "prepare": "husky"
   },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "() => 'pnpm lint'"
-    ],
-    "*.{css,scss}": [
-      "pnpm prettier --write"
-    ]
-  },
   "dependencies": {
     "@payloadcms/admin-bar": "3.69.0",
     "@payloadcms/db-mongodb": "3.69.0",
@@ -73,10 +65,12 @@
     "@types/node": "22.5.4",
     "@types/react": "19.2.1",
     "@types/react-dom": "19.2.1",
+    "@typescript-eslint/eslint-plugin": "^8.52.0",
+    "@typescript-eslint/parser": "^8.52.0",
     "@vitejs/plugin-react": "4.5.2",
     "autoprefixer": "^10.4.23",
     "copyfiles": "^2.4.1",
-    "eslint": "^9.16.0",
+    "eslint": "8",
     "eslint-config-next": "15.4.7",
     "jsdom": "26.1.0",
     "lint-staged": "^16.2.7",
