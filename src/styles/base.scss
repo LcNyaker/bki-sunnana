@@ -1,17 +1,18 @@
-@layer base {
-  body {
-    @apply font-sans text-foreground;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-heading;
-  }
-  :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-primary;
-  }
+html {
+  font-size: 18px;
+  line-height: 32px;
+
+  background: #fdcc32;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#app {
+  height: 100%;
 }
