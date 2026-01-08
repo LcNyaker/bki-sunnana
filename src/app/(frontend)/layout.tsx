@@ -1,18 +1,12 @@
-import type { Metadata } from 'next'
-
-import { Inter, Poppins } from 'next/font/google'
 import React from 'react'
-
-import { AdminBar } from '@/components/AdminBar'
-import { Footer } from '@/Footer/Component'
-import { Header } from '@/Header/Component'
-import { Providers } from '@/providers'
-import { InitTheme } from '@/providers/Theme/InitTheme'
-import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { draftMode } from 'next/headers'
-
 import './globals.scss'
-import { getServerSideURL } from '@/utilities/getURL'
+import { Inter, Poppins } from 'next/font/google'
+
+// app/layout.tsx
+/* import { getPayload } from 'payload'
+import config from '@payload-config' */
+import Footer from '@/app/components/fixtures/Footer'
+import { Header } from '@/app/components/fixtures/Header'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,37 +22,15 @@ const poppins = Poppins({
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isEnabled } = await draftMode()
+  /* const payload = await getPayload({ config }) */
 
   return (
     <html lang="sv" className={`${inter.variable} ${poppins.variable}`}>
-      <head>
-        <InitTheme />
-        <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
-      </head>
-      <body>
-        <Providers>
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
-
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+      <body className="flex flex-col">
+        <Header />
+        <main className="flex-1 mb-20 z-15 relative">{children}</main>
+        <Footer />
       </body>
     </html>
   )
-}
-
-export const metadata: Metadata = {
-  metadataBase: new URL(getServerSideURL()),
-  openGraph: mergeOpenGraph(),
-  twitter: {
-    card: 'summary_large_image',
-    creator: '@payloadcms',
-  },
 }

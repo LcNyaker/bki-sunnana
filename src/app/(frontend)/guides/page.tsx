@@ -2,7 +2,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { RenderBlocks } from '@/app/components/RenderBlocks'
-import PostList from '@/app/components/PostList'
 
 export default async function GuidePage() {
   const payload = await getPayload({ config })
@@ -12,7 +11,7 @@ export default async function GuidePage() {
     collection: 'pages',
     where: {
       slug: {
-        equals: 'posts', // ← Hämtar specifikt "home" slug
+        equals: 'guides', // ← Hämtar specifikt "home" slug
       },
     },
     limit: 1,
@@ -34,7 +33,6 @@ export default async function GuidePage() {
   return (
     <main className="flex flex-col gap-20 mt-20">
       {page.layout && page.layout.length > 0 ? <RenderBlocks layout={page.layout} /> : <div></div>}
-      <PostList />
     </main>
   )
 }
