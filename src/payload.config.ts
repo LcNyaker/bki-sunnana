@@ -14,19 +14,23 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
 import { buildConfig } from 'payload'
 
-// Colletions
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Posts } from './collections/Posts'
-import { Pages } from './collections/Pages'
-import { Guides } from './collections/Guides'
-
 // Globals
 import { Footer } from './app/globals/Footer'
 import { Nav } from './app/globals/Nav'
 import { Logo } from './app/globals/Logo'
-import { Comments } from './collections/Comments'
-import { Employees } from './collections/Employees'
+
+// Colletions
+
+//--General
+import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
+import { News } from './collections/News'
+import { Teams } from './collections/Teams'
+
+//--Persons
+import { Users } from './collections/Users'
+import { Players } from './collections/Players'
+import { Coaches } from './collections/Coaches'
 
 console.log('DB:', process.env.DATABASE_URL)
 
@@ -38,7 +42,7 @@ export default buildConfig({
     },
   },
   globals: [Nav, Footer, Logo],
-  collections: [Users, Media, Posts, Pages, Guides, Comments, Employees],
+  collections: [Users, Media, Pages, News, Teams, Players, Coaches],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'your-secret-fallback',
   typescript: {

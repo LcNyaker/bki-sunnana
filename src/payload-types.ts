@@ -72,8 +72,9 @@ export interface Config {
     posts: Post;
     pages: Page;
     guides: Guide;
-    comments: Comment;
-    employees: Employee;
+    teams: Team;
+    players: Player;
+    coaches: Coach;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,8 +87,9 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     guides: GuidesSelect<false> | GuidesSelect<true>;
-    comments: CommentsSelect<false> | CommentsSelect<true>;
-    employees: EmployeesSelect<false> | EmployeesSelect<true>;
+    teams: TeamsSelect<false> | TeamsSelect<true>;
+    players: PlayersSelect<false> | PlayersSelect<true>;
+    coaches: CoachesSelect<false> | CoachesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -314,28 +316,59 @@ export interface Guide {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "comments".
+ * via the `definition` "teams".
  */
-export interface Comment {
+export interface Team {
   id: string;
-  post: string | Post;
-  authorName: string;
-  content: string;
+  name: string;
+  /**
+   * Optional (e.g. U16, U18, Senior)
+   */
+  ageGroup?: string | null;
+  image?: (string | null) | Media;
+  /**
+   * Players connected to this team
+   */
+  players?: (string | Player)[] | null;
+  /**
+   * Staff members connected to this team
+   */
+  Coaches?: (string | Coach)[] | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "employees".
+ * via the `definition` "players".
  */
-export interface Employee {
+export interface Player {
   id: string;
-  forname: string;
+  forename: string;
   lastname: string;
-  position: string;
-  introduktion: string;
-  email?: string | null;
+  fullName?: string | null;
+  dateOfBirth: string;
+  position: 'back' | 'forward' | 'center' | 'goalie';
+  stickSide: 'left' | 'right' | 'none';
+  jerseyNumber: number;
   image: string | Media;
+  team: string | Team;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coaches".
+ */
+export interface Coach {
+  id: string;
+  forename: string;
+  lastname: string;
+  fullName?: string | null;
+  role: 'head-coach' | 'assistant-coach' | 'equipment-manager';
+  email: string;
+  phone?: string | null;
+  image?: (string | null) | Media;
+  team: string | Team;
   updatedAt: string;
   createdAt: string;
 }
@@ -384,12 +417,16 @@ export interface PayloadLockedDocument {
         value: string | Guide;
       } | null)
     | ({
-        relationTo: 'comments';
-        value: string | Comment;
+        relationTo: 'teams';
+        value: string | Team;
       } | null)
     | ({
-        relationTo: 'employees';
-        value: string | Employee;
+        relationTo: 'players';
+        value: string | Player;
+      } | null)
+    | ({
+        relationTo: 'coaches';
+        value: string | Coach;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -587,26 +624,47 @@ export interface GuidesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "comments_select".
+ * via the `definition` "teams_select".
  */
-export interface CommentsSelect<T extends boolean = true> {
-  post?: T;
-  authorName?: T;
-  content?: T;
+export interface TeamsSelect<T extends boolean = true> {
+  name?: T;
+  ageGroup?: T;
+  image?: T;
+  players?: T;
+  Coaches?: T;
   updatedAt?: T;
   createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "employees_select".
+ * via the `definition` "players_select".
  */
-export interface EmployeesSelect<T extends boolean = true> {
-  forname?: T;
+export interface PlayersSelect<T extends boolean = true> {
+  forename?: T;
   lastname?: T;
+  fullName?: T;
+  dateOfBirth?: T;
   position?: T;
-  introduktion?: T;
-  email?: T;
+  stickSide?: T;
+  jerseyNumber?: T;
   image?: T;
+  team?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coaches_select".
+ */
+export interface CoachesSelect<T extends boolean = true> {
+  forename?: T;
+  lastname?: T;
+  fullName?: T;
+  role?: T;
+  email?: T;
+  phone?: T;
+  image?: T;
+  team?: T;
   updatedAt?: T;
   createdAt?: T;
 }
