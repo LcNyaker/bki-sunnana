@@ -2,9 +2,9 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { RenderBlocks } from '@/app/components/RenderBlocks'
-import PostList from '@/app/components/PostList'
+import { Employees } from '@/app/components/Employees'
 
-export default async function GuidePage() {
+export default async function AboutPage() {
   const payload = await getPayload({ config })
 
   // Hämta från Pages collection
@@ -12,7 +12,7 @@ export default async function GuidePage() {
     collection: 'pages',
     where: {
       slug: {
-        equals: 'posts', // ← Hämtar specifikt "home" slug
+        equals: 'about', // ← Hämtar specifikt "home" slug
       },
     },
     limit: 1,
@@ -32,9 +32,10 @@ export default async function GuidePage() {
   }
 
   return (
-    <main className="flex flex-col gap-20 mt-20">
+    <main className="flex flex-col gap-20">
+      {/* Rendera alla blocks från home page */}
       {page.layout && page.layout.length > 0 ? <RenderBlocks layout={page.layout} /> : <div></div>}
-      <PostList />
+      <Employees />
     </main>
   )
 }

@@ -1,108 +1,115 @@
-import type { Metadata } from 'next'
-
-import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
-import { PayloadRedirects } from '@/components/PayloadRedirects'
-import configPromise from '@payload-config'
+import config from '@payload-config'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import { getPayload } from 'payload'
-import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
-import RichText from '@/components/RichText'
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { CaretLeftIcon } from '@phosphor-icons/react/dist/ssr/CaretLeft'
+import { Comments } from '@/app/components/Comments'
+import { CommentForm } from '@/app/components/forms/CommentForm'
 
-import type { Post } from '@/payload-types'
-
-import { PostHero } from '@/heros/PostHero'
-import { generateMeta } from '@/utilities/generateMeta'
-import PageClient from './page.client'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
-
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
-  const posts = await payload.find({
-    collection: 'posts',
-    draft: false,
-    limit: 1000,
-    overrideAccess: false,
-    pagination: false,
-    select: {
-      slug: true,
-    },
-  })
-
-  const params = posts.docs.map(({ slug }) => {
-    return { slug }
-  })
-
-  return params
-}
-
-type Args = {
+// TypeScript interface för params
+interface PageProps {
   params: Promise<{
-    slug?: string
+    slug: string
   }>
 }
 
-export default async function Post({ params: paramsPromise }: Args) {
-  const { isEnabled: draft } = await draftMode()
-  const { slug = '' } = await paramsPromise
-  // Decode to support slugs with special characters
-  const decodedSlug = decodeURIComponent(slug)
-  const url = '/posts/' + decodedSlug
-  const post = await queryPostBySlug({ slug: decodedSlug })
-
-  if (!post) return <PayloadRedirects url={url} />
-
-  return (
-    <article className="pt-16 pb-16">
-      <PageClient />
-
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
-
-      {draft && <LivePreviewListener />}
-
-      <PostHero post={post} />
-
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <RelatedPosts
-              className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-            />
-          )}
-        </div>
-      </div>
-    </article>
-  )
-}
-
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = '' } = await paramsPromise
-  // Decode to support slugs with special characters
-  const decodedSlug = decodeURIComponent(slug)
-  const post = await queryPostBySlug({ slug: decodedSlug })
-
-  return generateMeta({ doc: post })
-}
-
-const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
-
-  const payload = await getPayload({ config: configPromise })
+// Async Server Component
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params
+  const payload = await getPayload({ config })
 
   const result = await payload.find({
     collection: 'posts',
-    draft,
-    limit: 1,
-    overrideAccess: draft,
-    pagination: false,
     where: {
-      slug: {
-        equals: slug,
-      },
+      slug: { equals: slug },
+    },
+    limit: 1,
+  })
+
+  const post = result.docs[0]
+
+  const comments = await payload.find({
+    collection: 'comments',
+    where: {
+      post: { equals: post.id },
     },
   })
 
-  return result.docs?.[0] || null
-})
+  console.log('comments', comments)
+  /* console.log(slug)
+  console.log(result.docs) */
+
+  return (
+    <section className="px-4 bg-gray-900 pb-4">
+      <h1 className="text-3xl font-bold text-amber-400 mt-20 pl-4">Posts</h1>
+      {post && 0 ? (
+        <p>Something went wrong</p>
+      ) : (
+        <div>
+          <article
+            key={post.id}
+            className="w-full flex flex-col justify-between p-4 gap-6 items-center"
+          >
+            <div className="w-full">
+              <h2 className="text-xl text-amber-400 min-h-10">{post.title}</h2>
+              <i className="text-gray-400">{new Date(post.createdAt).toLocaleDateString()}</i>
+            </div>
+
+            <section className="border flex flex-col lg:flex-row-reverse gap-10">
+              {post.image && typeof post.image !== 'string' ? (
+                <figure className="flex justify-center aspect-video flex-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+                  <Image
+                    src={post.image.url ?? ''}
+                    alt={post.image.alt}
+                    width={post.image?.width as number}
+                    height={post.image?.height as number}
+                    className="rounded-xl object-cover"
+                  />
+                </figure>
+              ) : (
+                <p>No image</p>
+              )}
+              <div className="flex-1">
+                <div className="text-white">{post.body && <RichText data={post.body} />}</div>
+              </div>
+            </section>
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col w-full justify-between">
+                <div className="flex gap-2">
+                  <span>Author:</span>
+                  <span className="text-amber-400">{post.author}</span>
+                </div>
+              </div>
+              <Link
+                href={`/posts`}
+                className="flex justify-center text-amber-400 border rounded-lg whitespace-nowrap px-4 hover:bg-amber-400 hover:text-gray-900 animate-breathe"
+              >
+                <div className="flex items-center gap-2">
+                  <CaretLeftIcon />
+                  <span>Go back to posts</span>
+                </div>
+              </Link>
+            </div>
+          </article>
+        </div>
+      )}
+      {!comments || comments.docs.length === 0 ? (
+        <div className="italic p-4 text-gray-400">No comments yet...</div>
+      ) : (
+        comments.docs.map((c) => (
+          <Comments
+            key={c.id}
+            authorName={c.authorName}
+            content={c.content}
+            createdAt={c.createdAt}
+          />
+        ))
+      )}
+      <section>
+        <CommentForm postId={post.id} />
+      </section>
+    </section>
+  )
+}
