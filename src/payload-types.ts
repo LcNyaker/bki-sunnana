@@ -69,12 +69,14 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    posts: Post;
     pages: Page;
-    guides: Guide;
+    news: News;
     teams: Team;
     players: Player;
     coaches: Coach;
+    sponsors: Sponsor;
+    opponents: Opponent;
+    matches: Match;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,12 +86,14 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    posts: PostsSelect<false> | PostsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    guides: GuidesSelect<false> | GuidesSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     teams: TeamsSelect<false> | TeamsSelect<true>;
     players: PlayersSelect<false> | PlayersSelect<true>;
     coaches: CoachesSelect<false> | CoachesSelect<true>;
+    sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
+    opponents: OpponentsSelect<false> | OpponentsSelect<true>;
+    matches: MatchesSelect<false> | MatchesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -103,11 +107,13 @@ export interface Config {
     nav: Nav;
     footer: Footer;
     logo: Logo;
+    'club-arenas': ClubArena;
   };
   globalsSelect: {
     nav: NavSelect<false> | NavSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     logo: LogoSelect<false> | LogoSelect<true>;
+    'club-arenas': ClubArenasSelect<false> | ClubArenasSelect<true>;
   };
   locale: null;
   user: User & {
@@ -167,6 +173,10 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
+  /**
+   * Used to organize images in the media library
+   */
+  folder: 'teams' | 'players' | 'coaches' | 'sponsors' | 'opponents' | 'general';
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -178,35 +188,6 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: string;
-  title: string;
-  slug: string;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  published?: boolean | null;
-  image?: (string | null) | Media;
-  author?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -230,12 +211,6 @@ export interface Page {
             blockType: 'hero';
           }
         | {
-            'add existing guide'?: (string | null) | Guide;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'guide';
-          }
-        | {
             title: string;
             limit?: number | null;
             id?: string | null;
@@ -246,6 +221,7 @@ export interface Page {
             title?: string | null;
             body?: string | null;
             image?: (string | null) | Media;
+            fullwidth?: boolean | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'banner';
@@ -270,6 +246,38 @@ export interface Page {
             blockName?: string | null;
             blockType: 'test';
           }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'sponsors';
+          }
+        | {
+            title?: string | null;
+            body?: string | null;
+            backgroundColor?: ('black' | 'white' | 'primary-500' | 'secondary-500' | 'tertiary-500') | null;
+            textColor?: ('black' | 'white') | null;
+            image?: (string | null) | Media;
+            link: {
+              linkType?: ('internal' | 'external') | null;
+              internal?:
+                | ({
+                    relationTo: 'pages';
+                    value: string | Page;
+                  } | null)
+                | ({
+                    relationTo: 'news';
+                    value: string | News;
+                  } | null);
+              external?: string | null;
+              text: string;
+              buttonColor?: ('primary-500' | 'secondary-500' | 'tertiary-500' | 'black' | 'white') | null;
+            };
+            fullwidth?: boolean | null;
+            imageLeft?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageTextBlock';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -277,9 +285,9 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "guides".
+ * via the `definition` "news".
  */
-export interface Guide {
+export interface News {
   id: string;
   title: string;
   slug: string;
@@ -321,19 +329,9 @@ export interface Guide {
 export interface Team {
   id: string;
   name: string;
-  /**
-   * Optional (e.g. U16, U18, Senior)
-   */
-  ageGroup?: string | null;
-  image?: (string | null) | Media;
-  /**
-   * Players connected to this team
-   */
-  players?: (string | Player)[] | null;
-  /**
-   * Staff members connected to this team
-   */
-  Coaches?: (string | Coach)[] | null;
+  category: 'men' | 'women';
+  season: '2025/2026';
+  league: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -348,9 +346,9 @@ export interface Player {
   fullName?: string | null;
   dateOfBirth: string;
   position: 'back' | 'forward' | 'center' | 'goalie';
-  stickSide: 'left' | 'right' | 'none';
+  stickSide?: ('left' | 'right' | 'none') | null;
   jerseyNumber: number;
-  image: string | Media;
+  image?: (string | null) | Media;
   team: string | Team;
   updatedAt: string;
   createdAt: string;
@@ -369,6 +367,61 @@ export interface Coach {
   phone?: string | null;
   image?: (string | null) | Media;
   team: string | Team;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors".
+ */
+export interface Sponsor {
+  id: string;
+  name: string;
+  logo?: (string | null) | Media;
+  website: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opponents".
+ */
+export interface Opponent {
+  id: string;
+  name: string;
+  logo?: (string | null) | Media;
+  category: 'men' | 'women';
+  city?: string | null;
+  homeArena?: string | null;
+  arenaAddress?: string | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "matches".
+ */
+export interface Match {
+  id: string;
+  date: string;
+  round: number;
+  team: string | Team;
+  opponent: string | Opponent;
+  isHomeGame: boolean;
+  teamScore?: number | null;
+  opponentScore?: number | null;
+  isFinished?: boolean | null;
+  goals?:
+    | {
+        period: 'p1' | 'p2' | 'p3' | 'ot' | 'so';
+        minute: string;
+        teamType: 'own' | 'opponent';
+        scorer?: (string | null) | Player;
+        scorerName?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -405,16 +458,12 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'posts';
-        value: string | Post;
-      } | null)
-    | ({
         relationTo: 'pages';
         value: string | Page;
       } | null)
     | ({
-        relationTo: 'guides';
-        value: string | Guide;
+        relationTo: 'news';
+        value: string | News;
       } | null)
     | ({
         relationTo: 'teams';
@@ -427,6 +476,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'coaches';
         value: string | Coach;
+      } | null)
+    | ({
+        relationTo: 'sponsors';
+        value: string | Sponsor;
+      } | null)
+    | ({
+        relationTo: 'opponents';
+        value: string | Opponent;
+      } | null)
+    | ({
+        relationTo: 'matches';
+        value: string | Match;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -498,6 +559,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  folder?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -509,20 +571,6 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts_select".
- */
-export interface PostsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  body?: T;
-  published?: T;
-  image?: T;
-  author?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -543,13 +591,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        guide?:
-          | T
-          | {
-              'add existing guide'?: T;
-              id?: T;
-              blockName?: T;
-            };
         'list-block'?:
           | T
           | {
@@ -564,6 +605,7 @@ export interface PagesSelect<T extends boolean = true> {
               title?: T;
               body?: T;
               image?: T;
+              fullwidth?: T;
               id?: T;
               blockName?: T;
             };
@@ -592,15 +634,43 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        sponsors?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        imageTextBlock?:
+          | T
+          | {
+              title?: T;
+              body?: T;
+              backgroundColor?: T;
+              textColor?: T;
+              image?: T;
+              link?:
+                | T
+                | {
+                    linkType?: T;
+                    internal?: T;
+                    external?: T;
+                    text?: T;
+                    buttonColor?: T;
+                  };
+              fullwidth?: T;
+              imageLeft?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "guides_select".
+ * via the `definition` "news_select".
  */
-export interface GuidesSelect<T extends boolean = true> {
+export interface NewsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   content?: T;
@@ -628,10 +698,9 @@ export interface GuidesSelect<T extends boolean = true> {
  */
 export interface TeamsSelect<T extends boolean = true> {
   name?: T;
-  ageGroup?: T;
-  image?: T;
-  players?: T;
-  Coaches?: T;
+  category?: T;
+  season?: T;
+  league?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -665,6 +734,58 @@ export interface CoachesSelect<T extends boolean = true> {
   phone?: T;
   image?: T;
   team?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors_select".
+ */
+export interface SponsorsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  website?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opponents_select".
+ */
+export interface OpponentsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  category?: T;
+  city?: T;
+  homeArena?: T;
+  arenaAddress?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "matches_select".
+ */
+export interface MatchesSelect<T extends boolean = true> {
+  date?: T;
+  round?: T;
+  team?: T;
+  opponent?: T;
+  isHomeGame?: T;
+  teamScore?: T;
+  opponentScore?: T;
+  isFinished?: T;
+  goals?:
+    | T
+    | {
+        period?: T;
+        minute?: T;
+        teamType?: T;
+        scorer?: T;
+        scorerName?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -843,6 +964,24 @@ export interface Logo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "club-arenas".
+ */
+export interface ClubArena {
+  id: string;
+  arenas?:
+    | {
+        name: string;
+        isPrimary?: boolean | null;
+        address: string;
+        city: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nav_select".
  */
 export interface NavSelect<T extends boolean = true> {
@@ -933,6 +1072,24 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface LogoSelect<T extends boolean = true> {
   logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "club-arenas_select".
+ */
+export interface ClubArenasSelect<T extends boolean = true> {
+  arenas?:
+    | T
+    | {
+        name?: T;
+        isPrimary?: T;
+        address?: T;
+        city?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
