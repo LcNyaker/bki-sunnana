@@ -8,17 +8,23 @@ const config = {
   plugins: [tailwindcssAnimate, typography],
 
   safelist: [
-    'lg:col-span-4',
-    'lg:col-span-6',
-    'lg:col-span-8',
-    'lg:col-span-12',
-    'border-error-500',
-    'bg-error-500/30',
-    'border-success-500',
-    'bg-success-500/30',
-    'border-warning-500',
-    'bg-warning-500/30',
+    // background colors (CMS-driven)
+    'bg-black',
+    'bg-white',
     'bg-primary-500',
+    'bg-secondary-500',
+    'bg-tertiary-500',
+
+    // text colors
+    'text-black',
+    'text-white',
+
+    // button hovers
+    'hover:bg-primary-600',
+    'hover:bg-secondary-600',
+    'hover:bg-tertiary-600',
+    'hover:bg-neutral-800',
+    'hover:bg-neutral-100',
   ],
 
   theme: {
@@ -33,11 +39,13 @@ const config = {
         '2xl': '2rem',
       },
       screens: {
-        sm: '40rem',
-        md: '48rem',
-        lg: '64rem',
-        xl: '80rem',
-        '2xl': '86rem',
+        xs: '24rem', // 384px
+        sm: '40rem', // 640px
+        md: '48rem', // 768px
+        lg: '64rem', // 1024px
+        xl: '90rem', // 1440px
+        '2xl': '86rem', // 1376px
+        '3xl': '120rem', // 1920px
       },
     },
 
@@ -140,18 +148,12 @@ const config = {
       },
 
       animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
+        marquee: 'marquee 25s linear infinite',
       },
-
       keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
     },

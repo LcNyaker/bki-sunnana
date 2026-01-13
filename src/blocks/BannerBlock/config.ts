@@ -7,5 +7,11 @@ export const BannerConfig: Block = {
     { name: 'title', type: 'text', label: 'Title' },
     { name: 'body', type: 'textarea', label: 'Body' },
     { name: 'image', type: 'upload', relationTo: 'media', label: 'Hero-image' },
+    {
+      name: 'fullwidth',
+      type: 'checkbox',
+      label: 'Full width (no side padding)',
+      defaultValue: false,
+    },
   ],
 }

@@ -1,9 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import { HeroConfig } from '../blocks/HeroBlock/config'
-import { GuideConfig } from '@/blocks/GuideBlock.tsx/config'
 import { ListConfig } from '@/blocks/ListBlock/config'
 import { BannerConfig } from '@/blocks/BannerBlock/config'
 import { TestConfig } from '@/blocks/TestBlock/config'
+import { SponsorBlockConfig } from '@/blocks/Carousel/config'
+import { ImageTextBlockConfig } from '@/blocks/ImageTextBlock/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -32,7 +33,14 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [HeroConfig, GuideConfig, ListConfig, BannerConfig, TestConfig],
+      blocks: [
+        HeroConfig,
+        ListConfig,
+        BannerConfig,
+        TestConfig,
+        SponsorBlockConfig,
+        ImageTextBlockConfig,
+      ],
     },
   ],
 }

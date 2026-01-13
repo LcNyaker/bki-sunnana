@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-export const Teams: CollectionConfig = {
-  slug: 'teams',
+export const Opponents: CollectionConfig = {
+  slug: 'opponents',
   admin: {
     useAsTitle: 'name',
   },
@@ -10,6 +10,11 @@ export const Teams: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'logo',
+      type: 'upload',
+      relationTo: 'media',
     },
     {
       name: 'category',
@@ -21,15 +26,21 @@ export const Teams: CollectionConfig = {
       ],
     },
     {
-      name: 'season',
-      type: 'select',
-      required: true,
-      options: [{ label: '2025/2026', value: '2025/2026' }],
+      name: 'city',
+      type: 'text',
     },
     {
-      name: 'league',
+      name: 'homeArena',
       type: 'text',
-      required: true,
+    },
+    {
+      name: 'arenaAddress',
+      type: 'text',
+    },
+    {
+      name: 'active',
+      type: 'checkbox',
+      defaultValue: true,
     },
   ],
 }

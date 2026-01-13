@@ -2,15 +2,57 @@ import type { CollectionConfig } from 'payload'
 
 export const Players: CollectionConfig = {
   slug: 'players',
-  labels: {
-    singular: 'Player',
-    plural: 'Players',
-  },
-  access: {
-    read: () => true,
-  },
   admin: {
     useAsTitle: 'fullName',
+  },
+  hooks: {
+    beforeValidate: [
+      async ({ data, req, originalDoc }) => {
+        if (!data) {
+          return data
+        }
+
+        // Generate full name
+        if (data.forename && data.lastname) {
+          data.fullName = `${data.forename} ${data.lastname}`
+        }
+
+        // Ensure goalies don't have stick side
+        if (data.position === 'goalie') {
+          data.stickSide = 'none'
+        }
+
+        if (!data.team || !data.jerseyNumber) {
+          return data
+        }
+
+        const existingPlayers = await req.payload.find({
+          collection: 'players',
+          where: {
+            and: [
+              {
+                team: {
+                  equals: data.team,
+                },
+              },
+              {
+                jerseyNumber: {
+                  equals: data.jerseyNumber,
+                },
+              },
+            ],
+          },
+        })
+
+        const conflict = existingPlayers.docs.find((player) => player.id !== originalDoc?.id)
+
+        if (conflict) {
+          throw new Error(`Tröjnummer ${data.jerseyNumber} är redan upptaget i detta lag.`)
+        }
+
+        return data
+      },
+    ],
   },
   fields: [
     {
@@ -32,7 +74,6 @@ export const Players: CollectionConfig = {
     },
     {
       name: 'dateOfBirth',
-      label: 'Date of birth',
       type: 'date',
       required: true,
     },
@@ -57,10 +98,15 @@ export const Players: CollectionConfig = {
         { label: 'Right', value: 'right' },
         { label: 'None', value: 'none' },
       ],
+      admin: {
+        condition: (
+          _: unknown,
+          siblingData: { position?: 'back' | 'forward' | 'center' | 'goalie' },
+        ) => siblingData?.position !== 'goalie',
+      },
     },
     {
       name: 'jerseyNumber',
-      label: 'Jersey number',
       type: 'number',
       required: true,
       min: 1,
@@ -70,10 +116,7 @@ export const Players: CollectionConfig = {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
-      filterOptions: {
-        mimeType: { contains: 'image' },
-      },
+      required: false,
     },
     {
       name: 'team',

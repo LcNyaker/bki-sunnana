@@ -17,15 +17,42 @@ export interface BannerBlockType {
   id?: string | null
   blockName?: string | null
   image?: Media | null
+  fullwidth?: boolean
 }
 
-export interface GuideBlockType {
-  blockType: 'guide'
-  id: string
-  title: string
-  image?: Media
-  createdAt: string
-  author: string
+export interface SponsorBlockType {
+  blockType: 'sponsors'
+  id?: string
+}
+
+export interface ImageTextBlockType {
+  blockType: 'imageTextBlock'
+  title?: string | null
+  body?: string | null
+  id?: string | null
+  blockName?: string | null
+
+  link?: {
+    linkType?: 'internal' | 'external'
+    internal?: {
+      relationTo: 'pages' | 'news'
+      value:
+        | {
+            slug?: string
+            id?: string
+          }
+        | string
+    } | null
+    external?: string | null
+    text?: string
+  } | null
+
+  image?: Media | null
+  fullwidth?: boolean
+  imageLeft?: boolean
+  backgroundColor?: 'black' | 'white' | 'primary-500' | 'secondary-500' | 'tertiary-500'
+  textColor?: 'black' | 'white'
+  buttonColor?: 'primary-500' | 'secondary-500' | 'tertiary-500' | 'black' | 'white'
 }
 
 export interface ListBlockType {
@@ -60,7 +87,7 @@ export type TestBlockType = {
 }
 // Bas-interface för okända block-typer
 export interface UnknownBlockType {
-  blockType: Exclude<string, 'hero' | 'post-list' | 'guide' | 'banner'>
+  blockType: Exclude<string, 'hero' | 'post-list' | 'sponsors' | 'banner' | 'imageTextBlock'>
   id?: string | null
   blockName?: string | null
 }
@@ -68,7 +95,7 @@ export interface UnknownBlockType {
 // Union type av alla blocks (lägg till fler när du skapar dem)
 export type BlockType =
   | HeroBlockType
-  | GuideBlockType
+  | SponsorBlockType
   | ListBlockType
   | BannerBlockType
   | TestBlockType

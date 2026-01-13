@@ -1,24 +1,11 @@
 // app/(frontend)/page.tsx
-import { getPayload } from 'payload'
-import config from '@payload-config'
+
 import { RenderBlocks } from '../components/RenderBlocks'
+import StandingTable from '../components/tables/StandingTable'
+import { getPageBySlug } from '../lib/getPageBySlug'
 
 export default async function HomePage() {
-  const payload = await getPayload({ config })
-
-  // Hämta från Pages collection
-  const result = await payload.find({
-    collection: 'pages',
-    where: {
-      slug: {
-        equals: '/', // ← Hämtar specifikt "home" slug
-      },
-    },
-    depth: 2,
-    limit: 1,
-  })
-
-  const page = result.docs[0]
+  const page = await getPageBySlug('/')
 
   // Fallback page inte finns
   if (!page) {
@@ -35,7 +22,10 @@ export default async function HomePage() {
     <main>
       {/* Rendera alla blocks från home page */}
       {page.layout && page.layout.length > 0 ? (
-        <RenderBlocks layout={page.layout} />
+        <div>
+          <RenderBlocks layout={page.layout} />
+          <StandingTable />
+        </div>
       ) : (
         <div className="home">
           <div className="content">

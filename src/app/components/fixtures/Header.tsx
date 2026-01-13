@@ -4,6 +4,8 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { ListIcon, UserIcon, XIcon } from '@phosphor-icons/react'
 import Link from 'next/link'
+import { FloorballIcon } from '../../assets/Icons/FloorballIcon'
+import { PenguinIcon } from '../../assets/Icons/PenguinIcon'
 
 const NAV_ITEMS = [
   { label: 'Nyheter', href: '/nyheter' },
@@ -47,55 +49,60 @@ export const Header = () => {
     <>
       <header
         className={`
-    w-full bg-black section-wrapper
+    w-full bg-black sticky top-0 z-10 text-white
     ${isSubNavSticky ? '-translate-y-full' : 'translate-y-0'}
   `}
       >
-        <div className="flex items-center justify-between">
-          <section className="flex-1 py-4">
-            <Image src="/logo.png" alt="BKI Sunnanå logotyp" width={90} height={90} />
-          </section>
+        <section className="section-wrapper">
+          <section className="bg-gray-700"></section>
+          <div className="flex items-center justify-between overflow-hidden">
+            <section className="flex-1 py-2">
+              <Link href={'/'}>
+                <Image src="/logo.png" alt="BKI Sunnanå logotyp" width={40} height={40} />
+              </Link>
+            </section>
 
-          <section>
-            <h1 className="h1">BKI Sunnanå – En klubb för alla</h1>
-          </section>
-          <section className="flex-1 hidden md:flex justify-center">
-            <div className="flex ">
-              <span> SVG framöver</span>
-            </div>
-          </section>
+            <nav className=" z-40 hidden md:flex justify-between">
+              <ul className="flex flex-wrap gap-6 ">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="relative text-xs whitespace-nowrap after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all hover:after:w-full"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+                <button>
+                  <UserIcon size={20} />
+                </button>
+              </ul>
+            </nav>
+            <section className="flex-1 relative hidden md:flex justify-center">
+              <div className="absolute -top-20 right-0 text-gray-700">
+                <FloorballIcon size={200} />
+              </div>
+            </section>
 
-          <button
-            className="md:hidden pr-4 hover: "
-            aria-label="Open menu"
-            onClick={() => setMenuOpen(true)}
-          >
-            <ListIcon size={32} />
-          </button>
-        </div>
+            <button
+              className="md:hidden pr-4 hover: "
+              aria-label="Open menu"
+              onClick={() => setMenuOpen(true)}
+            >
+              <ListIcon size={32} />
+            </button>
+          </div>
+        </section>
       </header>
 
       <div ref={subNavSentinelRef} />
-      <nav className="sticky top-0 z-40 hidden section-wrapper md:flex bg-black border-t border-white/10 justify-between">
-        <ul className="flex flex-wrap gap-6 py-3 ">
-          {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="relative whitespace-nowrap after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-white after:transition-all hover:after:w-full"
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <button>
-          <UserIcon size={32} />
-        </button>
-      </nav>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/50" onClick={() => setMenuOpen(false)} />
+        <div
+          className="fixed inset-0 z-40 bg-black opacity-40"
+          onClick={() => setMenuOpen(false)}
+        />
       )}
 
       <aside
@@ -120,6 +127,9 @@ export const Header = () => {
             </Link>
           ))}
         </nav>
+        <div className="text-gray-700 absolute right-0 bottom-0 z-51">
+          <PenguinIcon size={200} />
+        </div>
       </aside>
     </>
   )

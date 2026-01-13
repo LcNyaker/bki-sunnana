@@ -1,4 +1,4 @@
-// app/(frontend)/page.tsx
+/* // app/(frontend)/page.tsx
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { RenderBlocks } from '@/app/components/RenderBlocks'
@@ -38,3 +38,4 @@ export default async function GuidePage() {
     </main>
   )
 }
+ */
