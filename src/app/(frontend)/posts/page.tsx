@@ -1,63 +1,41 @@
-import type { Metadata } from 'next/types'
-
-import { CollectionArchive } from '@/components/CollectionArchive'
-import { PageRange } from '@/components/PageRange'
-import { Pagination } from '@/components/Pagination'
-import configPromise from '@payload-config'
+/* // app/(frontend)/page.tsx
 import { getPayload } from 'payload'
-import React from 'react'
-import PageClient from './page.client'
+import config from '@payload-config'
+import { RenderBlocks } from '@/app/components/RenderBlocks'
+import PostList from '@/app/components/PostList'
 
-export const dynamic = 'force-static'
-export const revalidate = 600
+export default async function GuidePage() {
+  const payload = await getPayload({ config })
 
-export default async function Page() {
-  const payload = await getPayload({ config: configPromise })
-
-  const posts = await payload.find({
-    collection: 'posts',
-    depth: 1,
-    limit: 12,
-    overrideAccess: false,
-    select: {
-      title: true,
-      slug: true,
-      categories: true,
-      meta: true,
+  // Hämta från Pages collection
+  const result = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: {
+        equals: 'posts', // ← Hämtar specifikt "home" slug
+      },
     },
+    limit: 1,
   })
 
-  return (
-    <div className="pt-24 pb-24">
-      <PageClient />
-      <div className="container mb-16">
-        <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+  const page = result.docs[0]
+
+  // Fallback page inte finns
+  if (!page) {
+    return (
+      <div className="home">
+        <div className="content">
+          <h1>page not found</h1>
         </div>
       </div>
+    )
+  }
 
-      <div className="container mb-8">
-        <PageRange
-          collection="posts"
-          currentPage={posts.page}
-          limit={12}
-          totalDocs={posts.totalDocs}
-        />
-      </div>
-
-      <CollectionArchive posts={posts.docs} />
-
-      <div className="container">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
-        )}
-      </div>
-    </div>
+  return (
+    <main className="flex flex-col gap-20 mt-20">
+      {page.layout && page.layout.length > 0 ? <RenderBlocks layout={page.layout} /> : <div></div>}
+      <PostList />
+    </main>
   )
 }
-
-export function generateMetadata(): Metadata {
-  return {
-    title: `Payload Website Template Posts`,
-  }
-}
+ */
