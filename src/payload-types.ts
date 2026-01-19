@@ -77,6 +77,8 @@ export interface Config {
     sponsors: Sponsor;
     opponents: Opponent;
     matches: Match;
+    people: Person;
+    'team-lineups': TeamLineup;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +96,8 @@ export interface Config {
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     opponents: OpponentsSelect<false> | OpponentsSelect<true>;
     matches: MatchesSelect<false> | MatchesSelect<true>;
+    people: PeopleSelect<false> | PeopleSelect<true>;
+    'team-lineups': TeamLineupsSelect<false> | TeamLineupsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -176,7 +180,7 @@ export interface Media {
   /**
    * Used to organize images in the media library
    */
-  folder: 'teams' | 'players' | 'coaches' | 'sponsors' | 'opponents' | 'general';
+  folder: 'teams' | 'players' | 'coaches' | 'volunteer' | 'sponsors' | 'opponents' | 'news' | 'general';
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -218,9 +222,9 @@ export interface Page {
             blockType: 'list-block';
           }
         | {
-            title?: string | null;
-            body?: string | null;
-            image?: (string | null) | Media;
+            title: string;
+            backgroundColor?: ('black' | 'white' | 'primary-500' | 'secondary-500' | 'tertiary-500') | null;
+            textColor?: ('black' | 'white') | null;
             fullwidth?: boolean | null;
             id?: string | null;
             blockName?: string | null;
@@ -253,9 +257,8 @@ export interface Page {
           }
         | {
             title?: string | null;
+            undertitle?: string | null;
             body?: string | null;
-            backgroundColor?: ('black' | 'white' | 'primary-500' | 'secondary-500' | 'tertiary-500') | null;
-            textColor?: ('black' | 'white') | null;
             image?: (string | null) | Media;
             link: {
               linkType?: ('internal' | 'external') | null;
@@ -270,13 +273,35 @@ export interface Page {
                   } | null);
               external?: string | null;
               text: string;
-              buttonColor?: ('primary-500' | 'secondary-500' | 'tertiary-500' | 'black' | 'white') | null;
             };
             fullwidth?: boolean | null;
             imageLeft?: boolean | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'imageTextBlock';
+          }
+        | {
+            title?: string | null;
+            undertitle?: string | null;
+            body?: string | null;
+            image?: (string | null) | Media;
+            link: {
+              linkType?: ('internal' | 'external') | null;
+              internal?:
+                | ({
+                    relationTo: 'pages';
+                    value: string | Page;
+                  } | null)
+                | ({
+                    relationTo: 'news';
+                    value: string | News;
+                  } | null);
+              external?: string | null;
+              text: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsBlock';
           }
       )[]
     | null;
@@ -290,22 +315,50 @@ export interface Page {
 export interface News {
   id: string;
   title: string;
+  /**
+   * Underrubrik som visas under titeln
+   */
+  subtitle?: string | null;
+  /**
+   * inledning visas i nyhetskortet
+   */
+  intro?: string | null;
+  /**
+   * text till knappen
+   */
+  buttonText?: string | null;
   slug: string;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  content: (
+    | {
+        subtitle?: string | null;
+        text: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'textBlock';
+      }
+    | {
+        image: string | Media;
+        caption?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageBlock';
+      }
+  )[];
+  image?: (string | null) | Media;
   checklist?:
     | {
         title: string;
@@ -316,9 +369,38 @@ export interface News {
         id?: string | null;
       }[]
     | null;
+  author: {
+    authorType: 'person' | 'manual';
+    person?: (string | null) | Person;
+    manualName?: string | null;
+  };
   published?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people".
+ */
+export interface Person {
+  id: string;
+  forename: string;
+  lastName: string;
+  fullName?: string | null;
+  role:
+    | 'chairman'
+    | 'vice-chairman'
+    | 'secretary'
+    | 'treasurer'
+    | 'member'
+    | 'substitute'
+    | 'player-manager'
+    | 'editor';
+  responsibility?: ('children' | 'junior' | 'senior') | null;
+  email: string;
+  phone?: string | null;
   image?: (string | null) | Media;
-  author?: string | null;
+  published?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -348,7 +430,10 @@ export interface Player {
   position: 'back' | 'forward' | 'center' | 'goalie';
   stickSide?: ('left' | 'right' | 'none') | null;
   jerseyNumber: number;
-  image?: (string | null) | Media;
+  images: {
+    profile: string | Media;
+    portrait: string | Media;
+  };
   team: string | Team;
   updatedAt: string;
   createdAt: string;
@@ -427,6 +512,30 @@ export interface Match {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-lineups".
+ */
+export interface TeamLineup {
+  id: string;
+  /**
+   * Ex: Herrar 2025/26 – Lagbild
+   */
+  title: string;
+  team: string | Team;
+  season: string;
+  image: string | Media;
+  hotspots?:
+    | {
+        player: string | Player;
+        x: number;
+        y: number;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -488,6 +597,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'matches';
         value: string | Match;
+      } | null)
+    | ({
+        relationTo: 'people';
+        value: string | Person;
+      } | null)
+    | ({
+        relationTo: 'team-lineups';
+        value: string | TeamLineup;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -603,8 +720,8 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
-              body?: T;
-              image?: T;
+              backgroundColor?: T;
+              textColor?: T;
               fullwidth?: T;
               id?: T;
               blockName?: T;
@@ -644,9 +761,8 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              undertitle?: T;
               body?: T;
-              backgroundColor?: T;
-              textColor?: T;
               image?: T;
               link?:
                 | T
@@ -655,10 +771,27 @@ export interface PagesSelect<T extends boolean = true> {
                     internal?: T;
                     external?: T;
                     text?: T;
-                    buttonColor?: T;
                   };
               fullwidth?: T;
               imageLeft?: T;
+              id?: T;
+              blockName?: T;
+            };
+        newsBlock?:
+          | T
+          | {
+              title?: T;
+              undertitle?: T;
+              body?: T;
+              image?: T;
+              link?:
+                | T
+                | {
+                    linkType?: T;
+                    internal?: T;
+                    external?: T;
+                    text?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -672,8 +805,31 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface NewsSelect<T extends boolean = true> {
   title?: T;
+  subtitle?: T;
+  intro?: T;
+  buttonText?: T;
   slug?: T;
-  content?: T;
+  content?:
+    | T
+    | {
+        textBlock?:
+          | T
+          | {
+              subtitle?: T;
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageBlock?:
+          | T
+          | {
+              image?: T;
+              caption?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  image?: T;
   checklist?:
     | T
     | {
@@ -686,9 +842,14 @@ export interface NewsSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  author?:
+    | T
+    | {
+        authorType?: T;
+        person?: T;
+        manualName?: T;
+      };
   published?: T;
-  image?: T;
-  author?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -716,7 +877,12 @@ export interface PlayersSelect<T extends boolean = true> {
   position?: T;
   stickSide?: T;
   jerseyNumber?: T;
-  image?: T;
+  images?:
+    | T
+    | {
+        profile?: T;
+        portrait?: T;
+      };
   team?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -791,6 +957,43 @@ export interface MatchesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people_select".
+ */
+export interface PeopleSelect<T extends boolean = true> {
+  forename?: T;
+  lastName?: T;
+  fullName?: T;
+  role?: T;
+  responsibility?: T;
+  email?: T;
+  phone?: T;
+  image?: T;
+  published?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-lineups_select".
+ */
+export interface TeamLineupsSelect<T extends boolean = true> {
+  title?: T;
+  team?: T;
+  season?: T;
+  image?: T;
+  hotspots?:
+    | T
+    | {
+        player?: T;
+        x?: T;
+        y?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -836,7 +1039,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Nav {
   id: string;
   items: {
-    type: 'internal' | 'external' | 'dropdown';
+    type: 'internal' | 'dropdown';
     /**
      * Text som visas i navigationen
      */
@@ -845,14 +1048,6 @@ export interface Nav {
      * Välj en intern sida
      */
     page?: (string | null) | Page;
-    /**
-     * URL för extern länk (t.ex. https://example.com)
-     */
-    url?: string | null;
-    /**
-     * Öppna länken i ny flik
-     */
-    openInNewTab?: boolean | null;
     /**
      * Valfri ikon (kan användas med Phosphor Icons)
      */
@@ -863,7 +1058,7 @@ export interface Nav {
     subItems?:
       | {
           label: string;
-          page?: (string | null) | Page;
+          page: string | Page;
           /**
            * Kort beskrivning (visas under länken)
            */
@@ -991,8 +1186,6 @@ export interface NavSelect<T extends boolean = true> {
         type?: T;
         label?: T;
         page?: T;
-        url?: T;
-        openInNewTab?: T;
         icon?: T;
         subItems?:
           | T

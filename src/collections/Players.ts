@@ -12,12 +12,10 @@ export const Players: CollectionConfig = {
           return data
         }
 
-        // Generate full name
         if (data.forename && data.lastname) {
           data.fullName = `${data.forename} ${data.lastname}`
         }
 
-        // Ensure goalies don't have stick side
         if (data.position === 'goalie') {
           data.stickSide = 'none'
         }
@@ -113,10 +111,25 @@ export const Players: CollectionConfig = {
       max: 99,
     },
     {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      required: false,
+      name: 'images',
+      label: 'Bilder',
+      type: 'group',
+      fields: [
+        {
+          name: 'profile',
+          label: 'Profilbild',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
+          name: 'portrait',
+          label: 'Stående bild',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
     },
     {
       name: 'team',

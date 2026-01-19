@@ -5,6 +5,7 @@ import { BannerConfig } from '@/blocks/BannerBlock/config'
 import { TestConfig } from '@/blocks/TestBlock/config'
 import { SponsorBlockConfig } from '@/blocks/Carousel/config'
 import { ImageTextBlockConfig } from '@/blocks/ImageTextBlock/config'
+import { NewsBlockConfig } from '@/blocks/NewsBlock/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -40,6 +41,7 @@ export const Pages: CollectionConfig = {
         TestConfig,
         SponsorBlockConfig,
         ImageTextBlockConfig,
+        NewsBlockConfig,
       ],
     },
   ],

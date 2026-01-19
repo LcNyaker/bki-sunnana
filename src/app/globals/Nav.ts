@@ -21,7 +21,6 @@ export const Nav: GlobalConfig = {
           defaultValue: 'internal',
           options: [
             { label: 'Internal Page', value: 'internal' },
-            { label: 'External Link', value: 'external' },
             { label: 'Dropdown Menu', value: 'dropdown' },
           ],
         },
@@ -37,26 +36,10 @@ export const Nav: GlobalConfig = {
           name: 'page',
           type: 'relationship',
           relationTo: 'pages',
+          required: true,
           admin: {
-            condition: (data, siblingData) => siblingData?.type === 'internal',
+            condition: (_, siblingData) => siblingData?.type === 'internal',
             description: 'Välj en intern sida',
-          },
-        },
-        {
-          name: 'url',
-          type: 'text',
-          admin: {
-            condition: (data, siblingData) => siblingData?.type === 'external',
-            description: 'URL för extern länk (t.ex. https://example.com)',
-          },
-        },
-        {
-          name: 'openInNewTab',
-          type: 'checkbox',
-          defaultValue: false,
-          admin: {
-            condition: (data, siblingData) => siblingData?.type === 'external',
-            description: 'Öppna länken i ny flik',
           },
         },
         {
@@ -80,7 +63,7 @@ export const Nav: GlobalConfig = {
           type: 'array',
           maxRows: 6,
           admin: {
-            condition: (data, siblingData) => siblingData?.type === 'dropdown',
+            condition: (_, siblingData) => siblingData?.type === 'dropdown',
             description: 'Undermeny-items för dropdown',
           },
           fields: [
@@ -93,6 +76,7 @@ export const Nav: GlobalConfig = {
               name: 'page',
               type: 'relationship',
               relationTo: 'pages',
+              required: true,
             },
             {
               name: 'description',
