@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import React from 'react'
 import './globals.scss'
 import { Inter, Poppins } from 'next/font/google'
