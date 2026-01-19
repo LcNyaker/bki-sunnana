@@ -39,17 +39,20 @@ const config = {
         '2xl': '2rem',
       },
       screens: {
-        xs: '24rem', // 384px
-        sm: '40rem', // 640px
-        md: '48rem', // 768px
-        lg: '64rem', // 1024px
-        xl: '90rem', // 1440px
-        '2xl': '86rem', // 1376px
-        '3xl': '120rem', // 1920px
+        xs: '24rem', // 384px – very small phones
+        sm: '40rem', // 640px – phones
+        md: '48rem', // 768px – tablets
+        lg: '64rem', // 1024px – laptops
+        xl: '80rem', // 1280px – desktop (IMPORTANT)
+        '2xl': '96rem', // 1536px – large desktop
+        '3xl': '120rem', // 1920px – wide screens
       },
     },
 
     extend: {
+      screens: {
+        xs: '24rem', // 384px – very small phones
+      },
       colors: {
         /* ---------- Base ---------- */
         black: 'var(--black)',
