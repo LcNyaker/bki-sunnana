@@ -40,7 +40,7 @@ import { Matches } from './collections/Matches'
 import { ClubArenas } from './app/globals/ClubArenas'
 import { TeamLineups } from './collections/TeamLineUps'
 
-console.log('DB:', process.env.DATABASE_URL)
+console.log('DB:', process.env.DATABASE_URI)
 
 export default buildConfig({
   admin: {
@@ -70,7 +70,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URL || '',
+    url: process.env.DATABASE_URI || '',
   }),
   sharp,
   plugins: [],
