@@ -62,7 +62,7 @@ const Footer = () => {
         ))}
       </section>
 
-      <div className="flex flex-col items-center justify-between bg-black lg:flex-row">
+      <div className="flex flex-col items-center justify-between bg-black text-white lg:flex-row">
         <address className="flex items-center gap-6 py-3 section-wrapper">
           <a href="tel:+14155550132">66525 Kil</a>
           <a href="mailto:noname@example.com">styrelsen@bkisunnana.se</a>
