@@ -23,7 +23,7 @@ const poppins = Poppins({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   /* const payload = await getPayload({ config }) */
-
+  console.log(process.env.DATABASE_URI)
   return (
     <html lang="sv" className={`${inter.variable} ${poppins.variable}`}>
       <body className="flex flex-col">

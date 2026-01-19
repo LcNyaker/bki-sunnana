@@ -1,12 +1,8 @@
-import { config as dotenvConfig } from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
-// Ladda .env filen
-dotenvConfig({ path: path.resolve(dirname, '.env') })
 
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
@@ -40,7 +36,9 @@ import { Matches } from './collections/Matches'
 import { ClubArenas } from './app/globals/ClubArenas'
 import { TeamLineups } from './collections/TeamLineUps'
 
-console.log('DB:', process.env.DATABASE_URI)
+if (!process.env.DATABASE_URI) {
+  throw new Error('DATABASE_URI is missing')
+}
 
 export default buildConfig({
   admin: {
@@ -70,7 +68,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+    url: process.env.DATABASE_URI,
   }),
   sharp,
   plugins: [],
