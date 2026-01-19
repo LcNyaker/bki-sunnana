@@ -5,16 +5,17 @@ import { getPageBySlug } from '@/app/lib/getPageBySlug'
 import TeamsList from '@/app/components/lists/TeamsList'
 import VolunteersList from '@/app/components/lists/VolunteersList'
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const page = await getPageBySlug(params.slug)
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const page = await getPageBySlug(slug)
 
   if (!page) {
     return <div>404</div>
   }
 
-  const isMatchesPage = params.slug === 'matcher'
-  const isTeamsPage = params.slug === 'trupper'
-  const isAbouttPage = params.slug === 'om-oss'
+  const isMatchesPage = slug === 'matcher'
+  const isTeamsPage = slug === 'trupper'
+  const isAbouttPage = slug === 'om-oss'
 
   const isCMSPage = !isMatchesPage && !isTeamsPage
 
