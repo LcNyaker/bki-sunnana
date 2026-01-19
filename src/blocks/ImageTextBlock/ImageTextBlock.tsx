@@ -7,6 +7,7 @@ type ImageTextBlockProps = ImageTextBlockType
 
 export const ImageTextBlock = ({
   title,
+  undertitle,
   body,
   image,
   link,
@@ -14,7 +15,6 @@ export const ImageTextBlock = ({
   imageLeft,
   backgroundColor,
   textColor,
-  buttonColor,
 }: ImageTextBlockProps) => {
   const mappedLink = (() => {
     if (!link?.text) return undefined
@@ -44,17 +44,6 @@ export const ImageTextBlock = ({
 
   const textClass = textColor ? `text-${textColor}` : 'text-black'
 
-  const buttonClass =
-    buttonColor === 'primary-500'
-      ? 'bg-primary-500 hover:bg-primary-600 text-black'
-      : buttonColor === 'secondary-500'
-        ? 'bg-secondary-500 hover:bg-secondary-600 text-black'
-        : buttonColor === 'tertiary-500'
-          ? 'bg-tertiary-500 hover:bg-tertiary-600 text-black'
-          : buttonColor === 'black'
-            ? 'bg-black hover:bg-neutral-800 text-white'
-            : 'bg-white hover:bg-neutral-100 text-black'
-
   const ImageComponent = () => {
     if (!image?.url) {
       return null
@@ -79,10 +68,10 @@ export const ImageTextBlock = ({
       <div className={clsx('xxl:mx-auto', bgClass)}>
         <TextContent
           title={title ?? undefined}
+          undertitle={undertitle ?? undefined}
           bodyText={body ?? undefined}
           link={mappedLink}
           textClass={textClass}
-          buttonClass={buttonClass}
         />
       </div>
     )
@@ -95,20 +84,22 @@ export const ImageTextBlock = ({
           <ImageComponent />
           <TextContent
             title={title ?? undefined}
+            undertitle={undertitle ?? undefined}
             bodyText={body ?? undefined}
             link={mappedLink}
             textClass={textClass}
-            buttonClass={buttonClass}
+            imageLeft={imageLeft}
           />
         </>
       ) : (
         <>
           <TextContent
             title={title ?? undefined}
+            undertitle={undertitle ?? undefined}
             bodyText={body ?? undefined}
             link={mappedLink}
             textClass={textClass}
-            buttonClass={buttonClass}
+            imageLeft={imageLeft}
           />
           <ImageComponent />
         </>

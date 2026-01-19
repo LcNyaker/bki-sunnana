@@ -22,8 +22,10 @@ export const Media: CollectionConfig = {
         { label: 'Teams', value: 'teams' },
         { label: 'Players', value: 'players' },
         { label: 'Coaches', value: 'coaches' },
+        { label: 'Volunteers', value: 'volunteer' },
         { label: 'Sponsors', value: 'sponsors' },
         { label: 'Opponents', value: 'opponents' },
+        { label: 'News', value: 'news' },
         { label: 'General', value: 'general' },
       ],
       admin: {

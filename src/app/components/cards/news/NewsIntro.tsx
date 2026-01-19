@@ -1,0 +1,55 @@
+import Button from '@/app/components/buttons/Button'
+import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
+import clsx from 'clsx'
+
+type NewsIntroLink = {
+  url: string
+}
+
+type NewsIntroProps = {
+  title?: string
+  undertitle?: string
+  bodyText?: string
+  link?: NewsIntroLink
+  buttonText?: string
+  textClass?: string
+}
+
+export const NewsIntro = ({
+  title,
+  undertitle,
+  bodyText,
+  link,
+  textClass,
+  buttonText,
+}: NewsIntroProps) => {
+  return (
+    <section
+      className={clsx(
+        'order-2 md:order-[unset] flex items-start md:items-center justify-start',
+        textClass,
+      )}
+    >
+      <article className="pr-6 lg:pr-8 py-6 lg:py-6 w-full">
+        <div>
+          {title && <h2 className="truncate">{title}</h2>}
+          {undertitle && (
+            <p className="mt-2 text-sm font-semibold uppercase text-neutral-500 truncate">
+              {undertitle}
+            </p>
+          )}
+          {bodyText && <p className="mt-4  text-lg line-clamp-4 lg:line-clamp-5">{bodyText}</p>}
+
+          {link && (
+            <Button className="mt-4 flex gap-2" href={link.url} variant="secondary">
+              {buttonText}
+              <ArrowRightIcon size={20} />
+            </Button>
+          )}
+        </div>
+      </article>
+    </section>
+  )
+}
+
+export default NewsIntro

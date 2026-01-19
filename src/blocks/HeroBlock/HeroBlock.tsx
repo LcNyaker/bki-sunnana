@@ -3,37 +3,48 @@ import type { HeroBlockType } from '../../types/blocks'
 
 export const HeroBlock = ({ title, body, image }: HeroBlockType) => {
   return (
-    <div className="relative">
-      <div></div>
-      <section
-        className="relative flex flex-col items-center justify-center text-center w-full overflow-hidden h-[60vh]
-  max-h-[600px]"
-      >
-        {image?.url && (
-          <div className="absolute inset-0 z-5">
-            <Image
-              src={image.url || ''}
-              alt={image.alt || title || 'Hero image'}
-              fill
-              className="object-cover brightness-75 saturate-125"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-            />
-          </div>
+    <section className="relative h-[70vh] max-h-[720px] min-h-[480px] w-full overflow-hidden">
+      {image?.url && (
+        <Image
+          src={image.url}
+          alt={image.alt || title || 'Hero image'}
+          fill
+          priority
+          loading="eager"
+          className="object-cover scale-105 brightness-90"
+        />
+      )}
+      <div className="relative z-5 h-full section-wrapper flex flex-col  items-center lg:items-start justify-center">
+        {title && (
+          <h1
+            className="
+            text-4xl md:text-6xl font-extrabold
+            bg-gradient-to-r to-primary-200 from-primary-500 bg-clip-text text-transparent
+            drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]
+            [text-shadow:0_0_30px_rgba(255,180,0,0.35)]
+            "
+          >
+            {title}
+          </h1>
         )}
 
-        <div className="z-6 px-6 text-amber-400">
-          {title && (
-            <h1 className="font-extrabold drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]">{title}</h1>
-          )}
-          {body && (
-            <div className="flex justify-end text-center lg:text-end">
-              <p className="text-xl mt-6 max-w-2xl mx-auto lg:mr-0 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
-                {body}
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-    </div>
+        {body && (
+          <p
+            className="
+            mt-6 text-lg md:text-2xl
+            text-white
+            leading-relaxed
+            drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]
+            [text-shadow:
+            0_1px_2px_rgba(0,0,0,0.8),
+            0_0_12px_rgba(0,0,0,0.4)
+            ]
+            "
+          >
+            {body}
+          </p>
+        )}
+      </div>
+    </section>
   )
 }

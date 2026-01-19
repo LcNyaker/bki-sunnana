@@ -31,12 +31,14 @@ import { Teams } from './collections/Teams'
 import { Users } from './collections/Users'
 import { Players } from './collections/Players'
 import { Coaches } from './collections/Coaches'
+import { People } from './collections/People'
 
 //--Other
 import { Sponsors } from './collections/Sponsors'
 import { Opponents } from './collections/Opponents'
 import { Matches } from './collections/Matches'
 import { ClubArenas } from './app/globals/ClubArenas'
+import { TeamLineups } from './collections/TeamLineUps'
 
 console.log('DB:', process.env.DATABASE_URL)
 
@@ -48,7 +50,20 @@ export default buildConfig({
     },
   },
   globals: [Nav, Footer, Logo, ClubArenas],
-  collections: [Users, Media, Pages, News, Teams, Players, Coaches, Sponsors, Opponents, Matches],
+  collections: [
+    Users,
+    Media,
+    Pages,
+    News,
+    Teams,
+    Players,
+    Coaches,
+    Sponsors,
+    Opponents,
+    Matches,
+    People,
+    TeamLineups,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'your-secret-fallback',
   typescript: {

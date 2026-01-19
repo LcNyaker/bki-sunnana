@@ -12,34 +12,15 @@ export const ImageTextBlockConfig: Block = {
       type: 'text',
       label: 'Title',
     },
-
+    {
+      name: 'undertitle',
+      type: 'text',
+      label: 'Undertitle',
+    },
     {
       name: 'body',
       type: 'text',
       label: 'Body text',
-    },
-    {
-      name: 'backgroundColor',
-      type: 'select',
-      label: 'Background color',
-      defaultValue: 'white',
-      options: [
-        { label: 'Black', value: 'black' },
-        { label: 'White', value: 'white' },
-        { label: 'Primary', value: 'primary-500' },
-        { label: 'Secondary', value: 'secondary-500' },
-        { label: 'Tertiary', value: 'tertiary-500' },
-      ],
-    },
-    {
-      name: 'textColor',
-      type: 'select',
-      label: 'Text color',
-      defaultValue: 'black',
-      options: [
-        { label: 'Black', value: 'black' },
-        { label: 'White', value: 'white' },
-      ],
     },
 
     {
@@ -86,19 +67,6 @@ export const ImageTextBlockConfig: Block = {
           type: 'text',
           label: 'Button Text',
           required: true,
-        },
-        {
-          name: 'buttonColor',
-          type: 'select',
-          label: 'Button color',
-          defaultValue: 'primary-500',
-          options: [
-            { label: 'Primary', value: 'primary-500' },
-            { label: 'Secondary', value: 'secondary-500' },
-            { label: 'Tertiary', value: 'tertiary-500' },
-            { label: 'Black', value: 'black' },
-            { label: 'White', value: 'white' },
-          ],
         },
       ],
     },

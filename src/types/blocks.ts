@@ -28,6 +28,7 @@ export interface SponsorBlockType {
 export interface ImageTextBlockType {
   blockType: 'imageTextBlock'
   title?: string | null
+  undertitle?: string | null
   body?: string | null
   id?: string | null
   blockName?: string | null
@@ -53,6 +54,32 @@ export interface ImageTextBlockType {
   backgroundColor?: 'black' | 'white' | 'primary-500' | 'secondary-500' | 'tertiary-500'
   textColor?: 'black' | 'white'
   buttonColor?: 'primary-500' | 'secondary-500' | 'tertiary-500' | 'black' | 'white'
+}
+
+export interface NewsBlockType {
+  blockType: 'newsBlock'
+  title?: string | null
+  undertitle?: string | null
+  body?: string | null
+  id?: string | null
+  blockName?: string | null
+
+  link?: {
+    linkType?: 'internal' | 'external'
+    internal?: {
+      relationTo: 'pages' | 'news'
+      value:
+        | {
+            slug?: string
+            id?: string
+          }
+        | string
+    } | null
+    external?: string | null
+    text?: string
+  } | null
+
+  image?: Media | null
 }
 
 export interface ListBlockType {
