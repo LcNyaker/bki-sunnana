@@ -20,7 +20,7 @@
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --no-experimental-strip-types\" pnpm exec playwright test --config=playwright.config.ts",
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
-    "prepare": "husky"
+    "prepare": "if [ \"$HUSKY\" != \"0\" ]; then husky; fi"
   },
   "dependencies": {
     "@payloadcms/admin-bar": "3.69.0",
