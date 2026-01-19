@@ -1,5 +1,9 @@
+import TeamDisplay from '@/app/components/displays/teams/TeamDisplay'
 import { RenderBlocks } from '@/app/components/RenderBlocks'
+import StandingTable from '@/app/components/tables/StandingTable'
 import { getPageBySlug } from '@/app/lib/getPageBySlug'
+import TeamsList from '@/app/components/lists/TeamsList'
+import VolunteersList from '@/app/components/lists/VolunteersList'
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const page = await getPageBySlug(params.slug)
@@ -8,19 +12,24 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return <div>404</div>
   }
 
+  const isMatchesPage = params.slug === 'matcher'
+  const isTeamsPage = params.slug === 'trupper'
+  const isAbouttPage = params.slug === 'om-oss'
+
+  const isCMSPage = !isMatchesPage && !isTeamsPage
+
   return (
     <main>
-      {/* Rendera alla blocks från home page */}
-      {page.layout && page.layout.length > 0 ? (
-        <RenderBlocks layout={page.layout} />
-      ) : (
-        <div className="home">
-          <div className="content">
-            <h1>{page.title || 'Welcome'}</h1>
-            <p>This page has no content blocks yet.</p>
-          </div>
-        </div>
+      {isMatchesPage && <StandingTable />}
+      {isTeamsPage && (
+        <>
+          <TeamDisplay />
+          <TeamsList />
+        </>
       )}
+      {isAbouttPage && <VolunteersList />}
+
+      {isCMSPage && page.layout && page.layout.length > 0 && <RenderBlocks layout={page.layout} />}
     </main>
   )
 }

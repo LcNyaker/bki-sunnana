@@ -6,7 +6,7 @@ import { Inter, Poppins } from 'next/font/google'
 /* import { getPayload } from 'payload'
 import config from '@payload-config' */
 import Footer from '@/app/components/fixtures/Footer'
-import { Header } from '@/app/components/fixtures/Header'
+import Header from '@/app/components/fixtures/header/Header'
 
 const inter = Inter({
   subsets: ['latin'],

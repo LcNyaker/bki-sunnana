@@ -5,15 +5,15 @@ import type {
   SponsorBlockType,
   ListBlockType,
   BannerBlockType,
-  TestBlockType,
   ImageTextBlockType,
+  NewsBlockType,
 } from '@/types/blocks'
 import { ListBlock } from '@/blocks/ListBlock/ListBlock'
 import { BannerBlock } from '@/blocks/BannerBlock/BannerBlock'
-import { TestBlock } from '@/blocks/TestBlock/TestBlock'
 import { JSX } from 'react'
 import { SponsorBlock } from '@/blocks/Carousel/SponsorBlock'
 import { ImageTextBlock } from '@/blocks/ImageTextBlock/ImageTextBlock'
+import { NewsBlock } from '@/blocks/NewsBlock/NewsBlock'
 
 interface RenderBlocksProps {
   layout: PayloadBlockType[]
@@ -35,8 +35,8 @@ const blockRender = (block: PayloadBlockType, index: number): JSX.Element | null
     case 'imageTextBlock':
       return <ImageTextBlock key={block.id || index} {...(block as ImageTextBlockType)} />
 
-    case 'test':
-      return <TestBlock key={block.id || index} {...(block as TestBlockType)} />
+    case 'newsBlock':
+      return <NewsBlock key={block.id || index} {...(block as NewsBlockType)} />
 
     default:
       if (process.env.NODE_ENV === 'development') {
@@ -47,5 +47,5 @@ const blockRender = (block: PayloadBlockType, index: number): JSX.Element | null
 }
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => {
-  return <div id="hejhej">{layout.map((block, i) => blockRender(block, i))}</div>
+  return <div>{layout.map((block, i) => blockRender(block, i))}</div>
 }

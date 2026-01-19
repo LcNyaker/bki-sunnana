@@ -63,8 +63,6 @@ export const Checklist = ({ checklist }: ChecklistProps) => {
     setCheckedItems({})
   }
 
-  console.log('Checklist data:', checklist)
-
   return (
     <>
       {checklist && checklist.length > 0 && (

@@ -1,10 +1,10 @@
 import { Block } from 'payload'
 
-export const ImageTextBlockConfig: Block = {
-  slug: 'imageTextBlock',
+export const NewsBlockConfig: Block = {
+  slug: 'newsBlock',
   labels: {
-    singular: 'Image + Text block',
-    plural: 'Image + Text blocks',
+    singular: 'News holder',
+    plural: 'News holders',
   },
   fields: [
     {
@@ -69,20 +69,6 @@ export const ImageTextBlockConfig: Block = {
           required: true,
         },
       ],
-    },
-
-    {
-      name: 'fullwidth',
-      type: 'checkbox',
-      label: 'Full width (no side padding)',
-      defaultValue: false,
-    },
-
-    {
-      name: 'imageLeft',
-      type: 'checkbox',
-      label: 'Image to the left side',
-      defaultValue: true,
     },
   ],
 }
