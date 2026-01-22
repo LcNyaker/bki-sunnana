@@ -16,6 +16,15 @@ export const Players: CollectionConfig = {
           data.fullName = `${data.forename} ${data.lastname}`
         }
 
+        if (data.fullName && !data.slug) {
+          data.slug = data.fullName
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '')
+        }
+
         if (data.position === 'goalie') {
           data.stickSide = 'none'
         }
@@ -66,6 +75,16 @@ export const Players: CollectionConfig = {
     {
       name: 'fullName',
       type: 'text',
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true,
+      index: true,
       admin: {
         hidden: true,
       },

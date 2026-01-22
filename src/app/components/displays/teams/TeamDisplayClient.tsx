@@ -35,15 +35,15 @@ const TeamDisplayClient = ({ lineup }: TeamDisplayClientProps) => {
 
   return (
     <>
-      <section className="section-wrapper  grid gap-4 grid-cols-1 mt-10 2xl:grid-cols-6 2xl:h-[560px]">
+      <section className="grid gap-4 grid-cols-1 2xl:grid-cols-6 2xl:h-[560px]">
         <div
-          className="  relative
-    col-span-1
-    aspect-[16/9]
-    2xl:aspect-auto
-    2xl:h-full
-    2xl:col-span-4
-    shadow-lg shadow-black/40
+          className=" relative
+          col-span-1
+          aspect-[16/9]
+          2xl:aspect-auto
+          2xl:h-full
+          2xl:col-span-4
+          shadow-lg shadow-black/40
           "
           onMouseLeave={() => setActivePlayer(null)}
         >

@@ -29,7 +29,6 @@ const HeaderLayout = ({ nav }: HeaderLayoutProps) => {
             <div className="absolute -top-20 right-0 text-gray-700">
               <FloorballIcon size={150} />
             </div>
-            <div className="card"></div>
           </div>
           <MobileNav items={nav.items} />
         </div>
