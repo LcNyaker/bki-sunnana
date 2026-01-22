@@ -426,6 +426,7 @@ export interface Player {
   forename: string;
   lastname: string;
   fullName?: string | null;
+  slug: string;
   dateOfBirth: string;
   position: 'back' | 'forward' | 'center' | 'goalie';
   stickSide?: ('left' | 'right' | 'none') | null;
@@ -873,6 +874,7 @@ export interface PlayersSelect<T extends boolean = true> {
   forename?: T;
   lastname?: T;
   fullName?: T;
+  slug?: T;
   dateOfBirth?: T;
   position?: T;
   stickSide?: T;
