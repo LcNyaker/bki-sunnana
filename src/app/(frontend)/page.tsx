@@ -2,7 +2,7 @@
 
 import PrimaryDisplay from '../components/displays/PrimaryDisplay'
 import { RenderBlocks } from '../components/RenderBlocks'
-import { getPageBySlug } from '../lib/getPageBySlug'
+import { getPageBySlug } from '../../lib/getPageBySlug'
 
 export default async function HomePage() {
   const page = await getPageBySlug('/')
