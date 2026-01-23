@@ -79,6 +79,7 @@ export interface Config {
     matches: Match;
     people: Person;
     'team-lineups': TeamLineup;
+    'info-articles': InfoArticle;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -98,6 +99,7 @@ export interface Config {
     matches: MatchesSelect<false> | MatchesSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     'team-lineups': TeamLineupsSelect<false> | TeamLineupsSelect<true>;
+    'info-articles': InfoArticlesSelect<false> | InfoArticlesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -262,15 +264,10 @@ export interface Page {
             image?: (string | null) | Media;
             link: {
               linkType?: ('internal' | 'external') | null;
-              internal?:
-                | ({
-                    relationTo: 'pages';
-                    value: string | Page;
-                  } | null)
-                | ({
-                    relationTo: 'news';
-                    value: string | News;
-                  } | null);
+              internal?: {
+                relationTo: 'info-articles';
+                value: string | InfoArticle;
+              } | null;
               external?: string | null;
               text: string;
             };
@@ -305,6 +302,43 @@ export interface Page {
           }
       )[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "info-articles".
+ */
+export interface InfoArticle {
+  id: string;
+  title: string;
+  subtitle?: string | null;
+  /**
+   * URL-slug (t.ex. "om-oss", "stadgar", "medlemskap")
+   */
+  slug: string;
+  content: {
+    subtitle?: string | null;
+    text: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'textBlock';
+  }[];
+  published?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -606,6 +640,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'team-lineups';
         value: string | TeamLineup;
+      } | null)
+    | ({
+        relationTo: 'info-articles';
+        value: string | InfoArticle;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -991,6 +1029,30 @@ export interface TeamLineupsSelect<T extends boolean = true> {
         y?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "info-articles_select".
+ */
+export interface InfoArticlesSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  slug?: T;
+  content?:
+    | T
+    | {
+        textBlock?:
+          | T
+          | {
+              subtitle?: T;
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  published?: T;
   updatedAt?: T;
   createdAt?: T;
 }

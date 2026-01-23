@@ -7,9 +7,9 @@ type SeriesTableProps = {
 
 const SeriesTable2 = ({ table }: SeriesTableProps) => {
   return (
-    <article className="flex flex-col h-full">
+    <article className="flex flex-col max-w-[348px]:">
       <div className="flex flex-col h-full">
-        <div className="overflow-y-auto border-2 shadow-lg shadow-black/40 p-2">
+        <div className="overflow-y-auto border-2 shadow-lg shadow-black/40 p-2 h-full">
           <table className="w-full">
             <thead>
               <tr>
@@ -35,7 +35,7 @@ const SeriesTable2 = ({ table }: SeriesTableProps) => {
                 <tr key={row.position} className={row.position === 2 ? 'border-y-2' : ''}>
                   <td className="py-1">{row.position}</td>
                   <td className="truncate pr-2">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center">
                       {row.teamLogo && (
                         <div className="relative w-6 h-6 flex-shrink-0">
                           <Image

@@ -33,7 +33,7 @@ export const ImageTextBlock = ({
         return undefined
       } else if (internalValue?.slug) {
         // Om det är ett populerat objekt med slug
-        url = `/${internalValue.slug}`
+        url = `/information/${internalValue.slug}`
       }
     }
 
