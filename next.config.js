@@ -20,6 +20,11 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      {
+        protocol: 'https',
+        hostname: 'cdn.api.everysport.com',
+        pathname: '/logos/**',
+      },
     ],
   },
   webpack: (webpackConfig) => {

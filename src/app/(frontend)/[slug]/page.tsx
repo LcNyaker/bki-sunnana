@@ -1,6 +1,6 @@
 import { RenderBlocks } from '@/app/components/RenderBlocks'
-import StandingTable from '@/app/components/tables/StandingTable'
-import { getPageBySlug } from '@/app/lib/getPageBySlug'
+import MatchesWrapper from '@/app/components/wrappers/MatchesWrapper'
+import { getPageBySlug } from '@/lib/getPageBySlug'
 import VolunteersList from '@/app/components/lists/VolunteersList'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   return (
     <main>
-      {isMatchesPage && <StandingTable />}
+      {isMatchesPage && <MatchesWrapper />}
       {isAbouttPage && <VolunteersList />}
 
       {isCMSPage && page.layout && page.layout.length > 0 && <RenderBlocks layout={page.layout} />}
