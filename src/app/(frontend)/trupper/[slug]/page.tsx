@@ -7,19 +7,18 @@ import PlayerDisplay from '@/app/components/displays/player/PlayerDisplay'
 import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
 
 type PageProps = {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>
 }
 
 const PlayerPage = async ({ params }: PageProps) => {
   const payload = await getPayload({ config })
+  const { slug } = await params
 
   const res = await payload.find({
     collection: 'players',
     where: {
       slug: {
-        equals: params.slug,
+        equals: slug,
       },
     },
     depth: 2,

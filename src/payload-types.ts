@@ -202,6 +202,7 @@ export interface Media {
 export interface Page {
   id: string;
   title: string;
+  description?: string | null;
   /**
    * URL slug (t.ex. "home", "about")
    */
@@ -723,6 +724,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
+  description?: T;
   slug?: T;
   layout?:
     | T
@@ -1165,7 +1167,7 @@ export interface Footer {
               /**
                * Relativ URL (t.ex. /about) eller absolut (https://...)
                */
-              url: string;
+              url?: string | null;
               newTab?: boolean | null;
               id?: string | null;
             }[]
@@ -1173,13 +1175,22 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
-  socialLinks?:
+  socials?:
     | {
-        platform: 'facebook' | 'twitter' | 'instagram' | 'linkedin' | 'github' | 'youtube';
+        platform: 'facebook' | 'twitter' | 'instagram' | 'youtube';
         url: string;
         id?: string | null;
       }[]
     | null;
+  contact?:
+    | {
+        postcode: number;
+        city: string;
+        email: string;
+        id?: string | null;
+      }[]
+    | null;
+  creds?: string | null;
   copyrightText?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1284,13 +1295,22 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  socialLinks?:
+  socials?:
     | T
     | {
         platform?: T;
         url?: T;
         id?: T;
       };
+  contact?:
+    | T
+    | {
+        postcode?: T;
+        city?: T;
+        email?: T;
+        id?: T;
+      };
+  creds?: T;
   copyrightText?: T;
   updatedAt?: T;
   createdAt?: T;

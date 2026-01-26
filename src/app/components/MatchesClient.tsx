@@ -6,13 +6,11 @@ import NextMatchDisplay from './displays/matches/NextMatchDisplay'
 import LatestMatchDisplay from './displays/matches/LatestMatchDisplay'
 import type { NextMatch } from '@/types/everysport/ui/next-match'
 import type { LatestMatch } from '@/types/everysport/ui/latest-match'
-import type { SeriesTable as SeriesTableType } from '@/types/everysport/ui/series-table'
-import SeriesTable from './tables/SeriesTable'
 
 type MatchesClientProps = {
   upcomingMatches: NextMatch[] | null
   finishedMatches: LatestMatch[] | null
-  seriesTable: SeriesTableType | null
+  seriesTable: React.ReactNode
 }
 
 const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: MatchesClientProps) => {
@@ -69,13 +67,7 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
 
         <div className="lg:col-span-2 flex flex-col h-full">
           <h2 className="text-xl title-accent font-bold py-1 mb-2">Tabell</h2>
-          {seriesTable ? (
-            <SeriesTable table={seriesTable} />
-          ) : (
-            <div className="border-2 shadow-lg shadow-black/40 p-4">
-              <p className="text-center">Kunde inte hämta tabellen</p>
-            </div>
-          )}
+          {seriesTable}
         </div>
       </section>
 

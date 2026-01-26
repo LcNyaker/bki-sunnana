@@ -16,9 +16,7 @@ const DesktopNav = ({ items }: DesktopNavProps) => {
             typeof item.page === 'object' && item.page?.slug ? `/${item.page.slug}` : null
 
           if (!href) {
-            return (
-              null
-            )
+            return null
           }
 
           return (

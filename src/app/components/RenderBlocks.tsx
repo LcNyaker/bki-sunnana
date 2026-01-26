@@ -9,7 +9,7 @@ import type {
 } from '@/types/blocks'
 import { BannerBlock } from '@/blocks/BannerBlock/BannerBlock'
 import { JSX } from 'react'
-import { SponsorBlock } from '@/blocks/Carousel/SponsorBlock'
+import { SponsorBlock } from '@/blocks/CarousalBlock/CarousalBlock'
 import { ImageTextBlock } from '@/blocks/ImageTextBlock/ImageTextBlock'
 import { NewsBlock } from '@/blocks/NewsBlock/NewsBlock'
 import { VolunteersBlock } from '@/blocks/VolunteerBlock/VolunteerBlock'

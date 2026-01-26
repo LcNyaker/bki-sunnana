@@ -22,7 +22,7 @@ export const SponsorBlock = async () => {
     <section className="w-full overflow-hidden bg-white py-4 mb-10 ">
       <div className="relative w-full overflow-hidden">
         <div className="flex w-max animate-marquee gap-4 hover:[animation-play-state:paused]">
-          {[...sponsors.docs, ...sponsors.docs].map((sponsor, index) => (
+          {[...sponsors.docs, ...sponsors.docs, ...sponsors.docs].map((sponsor, index) => (
             <a
               key={`${sponsor.id}-${index}`}
               href={sponsor.website}

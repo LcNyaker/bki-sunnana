@@ -1,12 +1,13 @@
 import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
 import { RenderBlocks } from '@/app/components/RenderBlocks'
 import { getPageBySlug } from '@/lib/getPageBySlug'
+import { notFound } from 'next/navigation'
 
 const InformationPage = async () => {
   const page = await getPageBySlug('information')
 
   if (!page) {
-    return <div>404</div>
+    return notFound()
   }
 
   console.log(page)

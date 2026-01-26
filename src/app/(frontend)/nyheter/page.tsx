@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import NewsCard from '@/app/components/cards/news/NewsCard'
 import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
+import { notFound } from 'next/navigation'
 
 const NewsPage = async () => {
   const payload = await getPayload({ config })
@@ -16,6 +17,8 @@ const NewsPage = async () => {
     sort: '-createdAt',
     depth: 1,
   })
+
+  if (!newsRes) return notFound()
 
   return (
     <>

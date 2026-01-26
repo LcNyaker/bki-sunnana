@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { HeroConfig } from '../blocks/HeroBlock/config'
 import { BannerConfig } from '@/blocks/BannerBlock/config'
-import { SponsorBlockConfig } from '@/blocks/Carousel/config'
+import { SponsorBlockConfig } from '@/blocks/CarousalBlock/config'
 import { ImageTextBlockConfig } from '@/blocks/ImageTextBlock/config'
 import { NewsBlockConfig } from '@/blocks/NewsBlock/config'
 import { VolunteersConfig } from '@/blocks/VolunteerBlock/config'
@@ -20,6 +20,10 @@ export const Pages: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'description',
+      type: 'text',
     },
     {
       name: 'slug',
