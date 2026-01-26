@@ -4,10 +4,10 @@ import { useState } from 'react'
 import Image from 'next/image'
 import NextMatchDisplay from './displays/matches/NextMatchDisplay'
 import LatestMatchDisplay from './displays/matches/LatestMatchDisplay'
-import type { NextMatch } from '@/types/ui/next-match'
-import type { LatestMatch } from '@/types/ui/latest-match'
-import type { SeriesTable as SeriesTableType } from '@/types/ui/series-table'
-import SeriesTable2 from './tables/SerisTable2'
+import type { NextMatch } from '@/types/everysport/ui/next-match'
+import type { LatestMatch } from '@/types/everysport/ui/latest-match'
+import type { SeriesTable as SeriesTableType } from '@/types/everysport/ui/series-table'
+import SeriesTable from './tables/SeriesTable'
 
 type MatchesClientProps = {
   upcomingMatches: NextMatch[] | null
@@ -25,7 +25,6 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
 
   return (
     <>
-      {/* Huvudtabs som styr hela vyn */}
       <div className="w-full section-wrapper mt-10">
         <div className="flex gap-4 justify-center mb-6">
           <button
@@ -71,7 +70,7 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
         <div className="lg:col-span-2 flex flex-col h-full">
           <h2 className="text-xl title-accent font-bold py-1 mb-2">Tabell</h2>
           {seriesTable ? (
-            <SeriesTable2 table={seriesTable} />
+            <SeriesTable table={seriesTable} />
           ) : (
             <div className="border-2 shadow-lg shadow-black/40 p-4">
               <p className="text-center">Kunde inte hämta tabellen</p>

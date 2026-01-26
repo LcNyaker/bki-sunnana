@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import type { LatestMatch } from '@/types/ui/latest-match'
+import type { LatestMatch } from '@/types/everysport/ui/latest-match'
 
 type LatestMatchProps = {
   match: LatestMatch

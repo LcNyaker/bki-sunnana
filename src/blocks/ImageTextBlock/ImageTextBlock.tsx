@@ -107,5 +107,3 @@ export const ImageTextBlock = ({
     </div>
   )
 }
-
-export default ImageTextBlock

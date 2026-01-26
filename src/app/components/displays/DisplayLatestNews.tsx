@@ -5,7 +5,7 @@ import type { Media } from '@/payload-types'
 import Link from 'next/link'
 import Button from '../buttons/Button'
 
-const DisplayLatest = async () => {
+const DisplayLatestNews = async () => {
   const payload = await getPayload({ config })
 
   const newsRes = await payload.find({
@@ -58,4 +58,4 @@ const DisplayLatest = async () => {
   )
 }
 
-export default DisplayLatest
+export default DisplayLatestNews

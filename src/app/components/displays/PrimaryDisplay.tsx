@@ -1,7 +1,7 @@
-import DisplayLatest from './DisplayLatest'
-import SeriesTable2 from '../tables/SerisTable2'
+import DisplayLatest from './DisplayLatestNews'
+import SeriesTable from '../tables/SeriesTable'
 
-import type { SeriesTable as SeriesTableType } from '@/types/ui/series-table'
+import type { SeriesTable as SeriesTableType } from '@/types/everysport/ui/series-table'
 
 type SeriesProps = {
   seriesTable: SeriesTableType | null
@@ -18,7 +18,7 @@ const PrimaryDisplay = ({ seriesTable }: SeriesProps) => {
 
       <div className="lg:col-span-2">
         <h2 className="title-accent text-xl font-bold py-1 mb-2">Tabell</h2>
-        {seriesTable && <SeriesTable2 table={seriesTable} />}
+        {seriesTable && <SeriesTable table={seriesTable} />}
       </div>
     </section>
   )

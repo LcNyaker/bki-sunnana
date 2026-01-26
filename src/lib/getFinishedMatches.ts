@@ -1,4 +1,4 @@
-import type { LatestMatch } from '@/types/ui/latest-match'
+import type { LatestMatch } from '@/types/everysport/ui/latest-match'
 
 const TEAM_ID = 165144
 const apiKey = process.env.EVERYSPORT_API_KEY

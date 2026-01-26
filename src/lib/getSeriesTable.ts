@@ -1,4 +1,4 @@
-import type { SeriesTable } from '@/types/ui/series-table'
+import type { SeriesTable } from '@/types/everysport/ui/series-table'
 
 const LEAGUE_ID = 141500 // Division 5 Värmland västra
 const apiKey = process.env.EVERYSPORT_API_KEY

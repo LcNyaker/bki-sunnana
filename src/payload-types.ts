@@ -218,39 +218,12 @@ export interface Page {
           }
         | {
             title: string;
-            limit?: number | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'list-block';
-          }
-        | {
-            title: string;
             backgroundColor?: ('black' | 'white' | 'primary-500' | 'secondary-500' | 'tertiary-500') | null;
             textColor?: ('black' | 'white') | null;
             fullwidth?: boolean | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'banner';
-          }
-        | {
-            title: string;
-            body?: string | null;
-            image: string | Media;
-            layout?: {
-              contentAlignment?: ('tleft' | 'center' | 'right') | null;
-              height?: ('small' | 'medium' | 'large' | 'xlarge') | null;
-              overlayIntensity?: ('light' | 'medium' | 'dark' | 'none') | null;
-            };
-            button?: {
-              showButton?: boolean | null;
-              buttonText?: string | null;
-              buttonLink?: string | null;
-              buttonStyle?: ('primary' | 'secondary' | 'outline') | null;
-              buttonPosition?: ('below' | 'inline') | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'test';
           }
         | {
             id?: string | null;
@@ -300,7 +273,23 @@ export interface Page {
             blockName?: string | null;
             blockType: 'newsBlock';
           }
+        | {
+            title?: string | null;
+            description?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'volunteers';
+          }
       )[]
+    | null;
+  parent?: (string | null) | Page;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Page;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -747,14 +736,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'list-block'?:
-          | T
-          | {
-              title?: T;
-              limit?: T;
-              id?: T;
-              blockName?: T;
-            };
         banner?:
           | T
           | {
@@ -762,31 +743,6 @@ export interface PagesSelect<T extends boolean = true> {
               backgroundColor?: T;
               textColor?: T;
               fullwidth?: T;
-              id?: T;
-              blockName?: T;
-            };
-        test?:
-          | T
-          | {
-              title?: T;
-              body?: T;
-              image?: T;
-              layout?:
-                | T
-                | {
-                    contentAlignment?: T;
-                    height?: T;
-                    overlayIntensity?: T;
-                  };
-              button?:
-                | T
-                | {
-                    showButton?: T;
-                    buttonText?: T;
-                    buttonLink?: T;
-                    buttonStyle?: T;
-                    buttonPosition?: T;
-                  };
               id?: T;
               blockName?: T;
             };
@@ -834,6 +790,23 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        volunteers?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

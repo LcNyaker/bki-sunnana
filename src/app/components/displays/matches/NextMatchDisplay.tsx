@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { ClockIcon, MapPinIcon } from '@phosphor-icons/react/dist/ssr'
-import type { NextMatch } from '@/types/ui/next-match'
+import type { NextMatch } from '@/types/everysport/ui/next-match'
 
 type NextMatchProps = {
   match: NextMatch
