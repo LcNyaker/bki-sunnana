@@ -32,8 +32,6 @@ import { People } from './collections/People'
 
 //--Other
 import { Sponsors } from './collections/Sponsors'
-import { Opponents } from './collections/Opponents'
-import { Matches } from './collections/Matches'
 import { ClubArenas } from './app/globals/ClubArenas'
 import { TeamLineups } from './collections/TeamLineUps'
 import { InfoArticles } from './collections/Info-articles'
@@ -60,8 +58,6 @@ export default buildConfig({
     Players,
     Coaches,
     Sponsors,
-    Opponents,
-    Matches,
     People,
     TeamLineups,
     InfoArticles,

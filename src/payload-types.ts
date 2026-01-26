@@ -75,8 +75,6 @@ export interface Config {
     players: Player;
     coaches: Coach;
     sponsors: Sponsor;
-    opponents: Opponent;
-    matches: Match;
     people: Person;
     'team-lineups': TeamLineup;
     'info-articles': InfoArticle;
@@ -95,8 +93,6 @@ export interface Config {
     players: PlayersSelect<false> | PlayersSelect<true>;
     coaches: CoachesSelect<false> | CoachesSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
-    opponents: OpponentsSelect<false> | OpponentsSelect<true>;
-    matches: MatchesSelect<false> | MatchesSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     'team-lineups': TeamLineupsSelect<false> | TeamLineupsSelect<true>;
     'info-articles': InfoArticlesSelect<false> | InfoArticlesSelect<true>;
@@ -494,49 +490,6 @@ export interface Sponsor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "opponents".
- */
-export interface Opponent {
-  id: string;
-  name: string;
-  logo?: (string | null) | Media;
-  category: 'men' | 'women';
-  city?: string | null;
-  homeArena?: string | null;
-  arenaAddress?: string | null;
-  active?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "matches".
- */
-export interface Match {
-  id: string;
-  date: string;
-  round: number;
-  team: string | Team;
-  opponent: string | Opponent;
-  isHomeGame: boolean;
-  teamScore?: number | null;
-  opponentScore?: number | null;
-  isFinished?: boolean | null;
-  goals?:
-    | {
-        period: 'p1' | 'p2' | 'p3' | 'ot' | 'so';
-        minute: string;
-        teamType: 'own' | 'opponent';
-        scorer?: (string | null) | Player;
-        scorerName?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "team-lineups".
  */
 export interface TeamLineup {
@@ -614,14 +567,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'sponsors';
         value: string | Sponsor;
-      } | null)
-    | ({
-        relationTo: 'opponents';
-        value: string | Opponent;
-      } | null)
-    | ({
-        relationTo: 'matches';
-        value: string | Match;
       } | null)
     | ({
         relationTo: 'people';
@@ -926,47 +871,6 @@ export interface SponsorsSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
   website?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "opponents_select".
- */
-export interface OpponentsSelect<T extends boolean = true> {
-  name?: T;
-  logo?: T;
-  category?: T;
-  city?: T;
-  homeArena?: T;
-  arenaAddress?: T;
-  active?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "matches_select".
- */
-export interface MatchesSelect<T extends boolean = true> {
-  date?: T;
-  round?: T;
-  team?: T;
-  opponent?: T;
-  isHomeGame?: T;
-  teamScore?: T;
-  opponentScore?: T;
-  isFinished?: T;
-  goals?:
-    | T
-    | {
-        period?: T;
-        minute?: T;
-        teamType?: T;
-        scorer?: T;
-        scorerName?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
 }
