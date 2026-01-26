@@ -3,11 +3,9 @@
 import PrimaryDisplay from '../components/displays/PrimaryDisplay'
 import { RenderBlocks } from '../components/RenderBlocks'
 import { getPageBySlug } from '../../lib/getPageBySlug'
-import { getSeriesTable } from '@/lib/getSeriesTable'
 
 export default async function HomePage() {
   const page = await getPageBySlug('/')
-  const seriesTable = await getSeriesTable()
 
   if (!page) {
     return (
@@ -24,7 +22,7 @@ export default async function HomePage() {
       {page.layout && page.layout.length > 0 ? (
         <div>
           <RenderBlocks layout={page.layout} />
-          <PrimaryDisplay seriesTable={seriesTable} />
+          <PrimaryDisplay />
         </div>
       ) : (
         <div className="home">

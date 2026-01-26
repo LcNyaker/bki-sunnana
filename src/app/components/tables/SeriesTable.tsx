@@ -1,12 +1,19 @@
 import { FloorballIcon } from '@/app/assets/Icons/FloorballIcon'
+import { getSeriesTable } from '@/lib/getSeriesTable'
 import type { SeriesTable } from '@/types/everysport/ui/series-table'
 import Image from 'next/image'
 
-type SeriesTableProps = {
-  table: SeriesTable
-}
+const SeriesTable = async () => {
+  const table = await getSeriesTable()
 
-const SeriesTable = ({ table }: SeriesTableProps) => {
+  if (!table) {
+    return (
+      <div className="border-2 shadow-lg shadow-black/40 p-4">
+        <p className="text-center">Kunde inte hämta tabellen</p>
+      </div>
+    )
+  }
+
   return (
     <article className="flex flex-col max-w-[348px]:">
       <div className="flex flex-col h-full">
