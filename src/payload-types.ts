@@ -79,6 +79,7 @@ export interface Config {
     matches: Match;
     people: Person;
     'team-lineups': TeamLineup;
+    'info-articles': InfoArticle;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -98,6 +99,7 @@ export interface Config {
     matches: MatchesSelect<false> | MatchesSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     'team-lineups': TeamLineupsSelect<false> | TeamLineupsSelect<true>;
+    'info-articles': InfoArticlesSelect<false> | InfoArticlesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -216,39 +218,12 @@ export interface Page {
           }
         | {
             title: string;
-            limit?: number | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'list-block';
-          }
-        | {
-            title: string;
             backgroundColor?: ('black' | 'white' | 'primary-500' | 'secondary-500' | 'tertiary-500') | null;
             textColor?: ('black' | 'white') | null;
             fullwidth?: boolean | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'banner';
-          }
-        | {
-            title: string;
-            body?: string | null;
-            image: string | Media;
-            layout?: {
-              contentAlignment?: ('tleft' | 'center' | 'right') | null;
-              height?: ('small' | 'medium' | 'large' | 'xlarge') | null;
-              overlayIntensity?: ('light' | 'medium' | 'dark' | 'none') | null;
-            };
-            button?: {
-              showButton?: boolean | null;
-              buttonText?: string | null;
-              buttonLink?: string | null;
-              buttonStyle?: ('primary' | 'secondary' | 'outline') | null;
-              buttonPosition?: ('below' | 'inline') | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'test';
           }
         | {
             id?: string | null;
@@ -262,15 +237,10 @@ export interface Page {
             image?: (string | null) | Media;
             link: {
               linkType?: ('internal' | 'external') | null;
-              internal?:
-                | ({
-                    relationTo: 'pages';
-                    value: string | Page;
-                  } | null)
-                | ({
-                    relationTo: 'news';
-                    value: string | News;
-                  } | null);
+              internal?: {
+                relationTo: 'info-articles';
+                value: string | InfoArticle;
+              } | null;
               external?: string | null;
               text: string;
             };
@@ -303,8 +273,61 @@ export interface Page {
             blockName?: string | null;
             blockType: 'newsBlock';
           }
+        | {
+            title?: string | null;
+            description?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'volunteers';
+          }
       )[]
     | null;
+  parent?: (string | null) | Page;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Page;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "info-articles".
+ */
+export interface InfoArticle {
+  id: string;
+  title: string;
+  subtitle?: string | null;
+  /**
+   * URL-slug (t.ex. "om-oss", "stadgar", "medlemskap")
+   */
+  slug: string;
+  content: {
+    subtitle?: string | null;
+    text: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'textBlock';
+  }[];
+  published?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -606,6 +629,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'team-lineups';
         value: string | TeamLineup;
+      } | null)
+    | ({
+        relationTo: 'info-articles';
+        value: string | InfoArticle;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -709,14 +736,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'list-block'?:
-          | T
-          | {
-              title?: T;
-              limit?: T;
-              id?: T;
-              blockName?: T;
-            };
         banner?:
           | T
           | {
@@ -724,31 +743,6 @@ export interface PagesSelect<T extends boolean = true> {
               backgroundColor?: T;
               textColor?: T;
               fullwidth?: T;
-              id?: T;
-              blockName?: T;
-            };
-        test?:
-          | T
-          | {
-              title?: T;
-              body?: T;
-              image?: T;
-              layout?:
-                | T
-                | {
-                    contentAlignment?: T;
-                    height?: T;
-                    overlayIntensity?: T;
-                  };
-              button?:
-                | T
-                | {
-                    showButton?: T;
-                    buttonText?: T;
-                    buttonLink?: T;
-                    buttonStyle?: T;
-                    buttonPosition?: T;
-                  };
               id?: T;
               blockName?: T;
             };
@@ -796,6 +790,23 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        volunteers?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -991,6 +1002,30 @@ export interface TeamLineupsSelect<T extends boolean = true> {
         y?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "info-articles_select".
+ */
+export interface InfoArticlesSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  slug?: T;
+  content?:
+    | T
+    | {
+        textBlock?:
+          | T
+          | {
+              subtitle?: T;
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  published?: T;
   updatedAt?: T;
   createdAt?: T;
 }

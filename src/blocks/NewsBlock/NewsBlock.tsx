@@ -75,5 +75,3 @@ export const NewsBlock = ({ title, undertitle, body, image, link }: NewsBlockPro
     </section>
   )
 }
-
-export default NewsBlock

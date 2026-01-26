@@ -1,5 +1,6 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,6 +36,7 @@ import { Opponents } from './collections/Opponents'
 import { Matches } from './collections/Matches'
 import { ClubArenas } from './app/globals/ClubArenas'
 import { TeamLineups } from './collections/TeamLineUps'
+import { InfoArticles } from './collections/Info-articles'
 
 if (!process.env.DATABASE_URI) {
   throw new Error('DATABASE_URI is missing')
@@ -62,6 +64,7 @@ export default buildConfig({
     Matches,
     People,
     TeamLineups,
+    InfoArticles,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'your-secret-fallback',
@@ -72,5 +75,11 @@ export default buildConfig({
     url: process.env.DATABASE_URI,
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    nestedDocsPlugin({
+      collections: ['pages'],
+      generateLabel: (_, doc) => doc.title as string,
+      generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
+    }),
+  ],
 })

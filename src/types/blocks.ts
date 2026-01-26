@@ -82,36 +82,6 @@ export interface NewsBlockType {
   image?: Media | null
 }
 
-export interface ListBlockType {
-  blockType: 'list-block'
-  id?: string
-  blockName?: string | null
-  title?: string
-  limit?: number
-}
-
-export type TestBlockType = {
-  blockType: 'test'
-  id?: string
-  title: string
-  body?: string
-  image: {
-    url: string
-    alt?: string
-  }
-  layout?: {
-    contentAlignment: 'left' | 'center' | 'right'
-    height: 'small' | 'medium' | 'large' | 'xlarge'
-    overlayIntensity: 'light' | 'medium' | 'dark' | 'none'
-  }
-  button?: {
-    showButton: boolean
-    buttonText?: string
-    buttonLink?: string
-    buttonStyle?: 'primary' | 'secondary' | 'outline'
-    buttonPosition?: 'below' | 'inline'
-  }
-}
 // Bas-interface för okända block-typer
 export interface UnknownBlockType {
   blockType: Exclude<string, 'hero' | 'post-list' | 'sponsors' | 'banner' | 'imageTextBlock'>
@@ -120,12 +90,7 @@ export interface UnknownBlockType {
 }
 
 // Union type av alla blocks (lägg till fler när du skapar dem)
-export type BlockType =
-  | HeroBlockType
-  | SponsorBlockType
-  | ListBlockType
-  | BannerBlockType
-  | TestBlockType
+export type BlockType = HeroBlockType | SponsorBlockType | BannerBlockType
 
 // Utökad type som hanterar alla block från Payload
 export type PayloadBlockType = BlockType | UnknownBlockType

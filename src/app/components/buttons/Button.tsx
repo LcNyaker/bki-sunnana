@@ -36,6 +36,8 @@ const variants: Record<ButtonVariant, string> = {
     hover:font-bold
     hover:scale-110
     active:translate-y-0
+    border-2 
+    border-black
   `,
   secondary: `
     border border-[var(--secondary-500)]

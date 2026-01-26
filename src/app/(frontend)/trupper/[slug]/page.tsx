@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { notFound } from 'next/navigation'
 import PlayerDisplay from '@/app/components/displays/player/PlayerDisplay'
+import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
 
 type PageProps = {
   params: {
@@ -31,7 +32,17 @@ const PlayerPage = async ({ params }: PageProps) => {
     notFound()
   }
 
-  return <PlayerDisplay player={player} />
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          { label: 'Trupper', href: '/trupper' },
+          { label: player.fullName || `${player.forename} ${player.lastname}` },
+        ]}
+      />
+      <PlayerDisplay player={player} />
+    </>
+  )
 }
 
 export default PlayerPage

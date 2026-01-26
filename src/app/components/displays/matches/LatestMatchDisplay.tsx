@@ -1,92 +1,63 @@
-import config from '@payload-config'
 import Image from 'next/image'
-import { getPayload } from 'payload'
-import type { Match } from '@/payload-types'
-import Button from '../../buttons/Button'
+import type { LatestMatch } from '@/types/everysport/ui/latest-match'
 
-type MatchDisplayProps = {
-  latestMatch: Match
+type LatestMatchProps = {
+  match: LatestMatch
 }
 
-const LatestMatchDisplay = async ({ latestMatch }: MatchDisplayProps) => {
-  const payload = await getPayload({ config })
-
-  const team = typeof latestMatch.team === 'string' ? null : latestMatch.team
-  const opponent = typeof latestMatch.opponent === 'string' ? null : latestMatch.opponent
-
-  if (!team || !opponent) return null
-
-  const [logoGlobal] = await Promise.all([
-    payload.findGlobal({ slug: 'logo', depth: 1 }),
-    payload.findGlobal({ slug: 'club-arenas', depth: 1 }),
-  ])
-
-  const clubLogo = logoGlobal?.logo
-
-  const isHomeGame = latestMatch.isHomeGame
-
-  const homeTeam = isHomeGame ? team : opponent
-  const awayTeam = isHomeGame ? opponent : team
-
-  const homeScore = isHomeGame ? latestMatch.teamScore : latestMatch.opponentScore
-
-  const awayScore = isHomeGame ? latestMatch.opponentScore : latestMatch.teamScore
-
-  const homeLogo = isHomeGame ? clubLogo : opponent.logo
-  const awayLogo = isHomeGame ? opponent.logo : clubLogo
+const LatestMatchDisplay = ({ match }: LatestMatchProps) => {
+  if (!match) {
+    return (
+      <section className="border-2 shadow-lg shadow-black/40 p-4">
+        <p className="text-center opacity-70">Kunde inte hämta senaste match</p>
+      </section>
+    )
+  }
 
   return (
-    <>
-      <h3 className="text-lg p-2">Omgång {latestMatch.round}</h3>
-      <section className="border-2 shadow-lg shadow-black/40 p-4">
-        <div className="flex justify-center items-center mb-4">
-          <span className="text-sm opacity-70">{team.league}</span>
-        </div>
-        <div className="flex flex-col xs:flex-row items-center gap-4 justify-around">
-          <div>
-            {homeLogo && typeof homeLogo !== 'string' && (
-              <div className="flex-1 flex flex-col items-center justify-between gap-2 w-[100px] text-center">
-                <Image
-                  src={homeLogo.url || 'fallback'}
-                  alt={homeLogo.alt || homeTeam.name}
-                  width={100}
-                  height={100}
-                  loading="lazy"
-                  className="shrink-0"
-                />
-                <div>
-                  <p className="font-medium">{homeTeam.name}</p>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="flex items-center flex-col xs:flex-row justify-center gap-2 text-3xl font-bold">
-            <span>{homeScore}</span>
-            <span>–</span>
-            <span>{awayScore}</span>
-          </div>
-          <div>
-            {awayLogo && typeof awayLogo !== 'string' && (
-              <div className="flex-1 flex flex-col items-center justify-between gap-2 text-center w-[100px]">
-                <Image
-                  src={awayLogo.url || 'fallback'}
-                  alt={awayLogo.alt || awayTeam.name}
-                  width={100}
-                  height={100}
-                  loading="lazy"
-                  className="shrink-0"
-                />
+    <section className="border-2 shadow-lg shadow-black/40 p-4">
+      <div className="flex justify-start items-center mb-4">
+        <span className="text-sm font-semibold opacity-70">Omgång {match.round}</span>
+      </div>
 
-                <p className="font-medium text-sm w-full">{awayTeam.name}</p>
-              </div>
-            )}
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 mt-6 text-sm gap-4">
+        <div className="flex flex-col items-center justify-between gap-2">
+          {match.homeTeam.logo && (
+            <Image
+              src={match.homeTeam.logo}
+              alt={match.homeTeam.name}
+              width={100}
+              height={100}
+              className="object-contain w-24 h-24"
+            />
+          )}
+          <span className="font-semibold">{match.homeTeam.name}</span>
         </div>
-        <div className="flex justify-center items-center mt-10">
-          <Button href="/">Matchdetaljer</Button>
+
+        <div className="flex items-center justify-center gap-3">
+          <span className="text-5xl font-bold">{match.homeTeam.score}</span>
+          <span className="text-3xl opacity-50">–</span>
+          <span className="text-5xl font-bold">{match.awayTeam.score}</span>
         </div>
-      </section>
-    </>
+
+        <div className="flex flex-col items-center justify-between gap-2">
+          {match.awayTeam.logo && (
+            <Image
+              src={match.awayTeam.logo}
+              alt={match.awayTeam.name}
+              width={100}
+              height={100}
+              className="object-contain w-24 h-24"
+            />
+          )}
+          <span className="font-semibold">{match.awayTeam.name}</span>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center mt-6 gap-1 text-sm">
+        <span className="opacity-70">{match.leagueName}</span>
+      </div>
+    </section>
   )
 }
 

@@ -48,7 +48,7 @@ export const ImageTextBlockConfig: Block = {
         {
           name: 'internal',
           type: 'relationship',
-          relationTo: ['pages', 'news'],
+          relationTo: ['info-articles'],
           label: 'Internal page',
           admin: {
             condition: (_, siblingData) => siblingData?.linkType === 'internal',

@@ -3,17 +3,16 @@ import type {
   PayloadBlockType,
   HeroBlockType,
   SponsorBlockType,
-  ListBlockType,
   BannerBlockType,
   ImageTextBlockType,
   NewsBlockType,
 } from '@/types/blocks'
-import { ListBlock } from '@/blocks/ListBlock/ListBlock'
 import { BannerBlock } from '@/blocks/BannerBlock/BannerBlock'
 import { JSX } from 'react'
 import { SponsorBlock } from '@/blocks/Carousel/SponsorBlock'
 import { ImageTextBlock } from '@/blocks/ImageTextBlock/ImageTextBlock'
 import { NewsBlock } from '@/blocks/NewsBlock/NewsBlock'
+import { VolunteersBlock } from '@/blocks/VolunteerBlock/VolunteerBlock'
 
 interface RenderBlocksProps {
   layout: PayloadBlockType[]
@@ -26,9 +25,6 @@ const blockRender = (block: PayloadBlockType, index: number): JSX.Element | null
     case 'sponsors':
       return <SponsorBlock key={block.id || index} {...(block as SponsorBlockType)} />
 
-    case 'list-block':
-      return <ListBlock key={block.id || index} {...(block as ListBlockType)} />
-
     case 'banner':
       return <BannerBlock key={block.id || index} {...(block as BannerBlockType)} />
 
@@ -37,6 +33,9 @@ const blockRender = (block: PayloadBlockType, index: number): JSX.Element | null
 
     case 'newsBlock':
       return <NewsBlock key={block.id || index} {...(block as NewsBlockType)} />
+
+    case 'volunteers':
+      return <VolunteersBlock key={block.id || index} />
 
     default:
       if (process.env.NODE_ENV === 'development') {

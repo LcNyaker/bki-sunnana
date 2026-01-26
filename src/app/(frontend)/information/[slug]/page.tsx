@@ -1,20 +1,20 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import type { News } from '@/payload-types'
-import NewsArticle from '@/app/components/news/NewsArticle'
 import { notFound } from 'next/navigation'
+import Info from '@/app/components/info/InfoArticle'
 import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
 
 type PageProps = {
   params: Promise<{ slug: string }>
 }
 
-const NewsPage = async ({ params }: PageProps) => {
+const InfoArticlePage = async ({ params }: PageProps) => {
   const { slug } = await params
   const payload = await getPayload({ config })
 
+  // Hämta artikeln från info-articles collection
   const res = await payload.find({
-    collection: 'news',
+    collection: 'info-articles',
     where: {
       slug: { equals: slug },
       published: { equals: true },
@@ -23,22 +23,23 @@ const NewsPage = async ({ params }: PageProps) => {
     depth: 3,
   })
 
-  const news = res.docs[0] as News | undefined
+  const article = res.docs[0]
 
-  console.log('Fetched news article:', news)
-
-  if (!news) {
+  if (!article) {
     notFound()
   }
-
+  console.log(article)
   return (
     <>
       <Breadcrumbs
-        items={[{ label: 'Nyheter', href: '/nyheter' }, { label: news.title || 'Nyhet' }]}
+        items={[
+          { label: 'Information', href: '/information' },
+          { label: article.title || 'Artikel' },
+        ]}
       />
-      <NewsArticle news={news} />
+      <Info info={article} />
     </>
   )
 }
 
-export default NewsPage
+export default InfoArticlePage

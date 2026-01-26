@@ -1,11 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import { HeroConfig } from '../blocks/HeroBlock/config'
-import { ListConfig } from '@/blocks/ListBlock/config'
 import { BannerConfig } from '@/blocks/BannerBlock/config'
-import { TestConfig } from '@/blocks/TestBlock/config'
 import { SponsorBlockConfig } from '@/blocks/Carousel/config'
 import { ImageTextBlockConfig } from '@/blocks/ImageTextBlock/config'
 import { NewsBlockConfig } from '@/blocks/NewsBlock/config'
+import { VolunteersConfig } from '@/blocks/VolunteerBlock/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -36,12 +35,11 @@ export const Pages: CollectionConfig = {
       type: 'blocks',
       blocks: [
         HeroConfig,
-        ListConfig,
         BannerConfig,
-        TestConfig,
         SponsorBlockConfig,
         ImageTextBlockConfig,
         NewsBlockConfig,
+        VolunteersConfig,
       ],
     },
   ],
