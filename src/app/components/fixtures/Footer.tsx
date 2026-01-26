@@ -12,8 +12,6 @@ const Footer = async () => {
 
   if (!footer) return null
 
-  console.log(footer)
-
   return <FooterClient footer={footer} />
 }
 

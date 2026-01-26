@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import FooterMenu from '../menus/FooterMenu'
 import { Footer } from '@/payload-types'
+import Link from 'next/link'
+import { FacebookLogoIcon, InstagramLogoIcon } from '@phosphor-icons/react'
 
 type FooterProps = {
   footer: Footer
@@ -10,11 +12,11 @@ type FooterProps = {
 
 const FooterClient = ({ footer }: FooterProps) => {
   const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({
-    information: false,
-    support: false,
-    shortcuts: false,
-    social: false,
-    app: false,
+    club: false,
+    members: false,
+    sports: false,
+    partners: false,
+    legal: false,
   })
 
   const toggleMenus = (menuKey: string) => {
@@ -24,6 +26,7 @@ const FooterClient = ({ footer }: FooterProps) => {
     }))
   }
 
+  console.log(footer.socials)
   const menus = [
     {
       title: 'Föreningen',
@@ -54,18 +57,37 @@ const FooterClient = ({ footer }: FooterProps) => {
 
   return (
     <footer className="w-full bg-secondary-500">
-      <section className="grid grid-cols-1 p-4 section-wrapper sm:grid-cols-3 sm:gap-6 md:grid-cols-5 md:p-10">
-        {menus.map((menu) => (
-          <FooterMenu
-            key={menu.key}
-            title={menu.title}
-            menuKey={menu.key}
-            items={menu.items}
-            isOpen={openMenus[menu.key]}
-            toggleMenu={toggleMenus}
-          />
-        ))}
-      </section>
+      <div className="section-wrapper">
+        <section className="grid grid-cols-1 sm:grid-cols-3 sm:gap-6 md:grid-cols-5 md:py-10">
+          {menus.map((menu) => (
+            <FooterMenu
+              key={menu.key}
+              title={menu.title}
+              menuKey={menu.key}
+              items={menu.items}
+              isOpen={openMenus[menu.key]}
+              toggleMenu={toggleMenus}
+            />
+          ))}
+        </section>
+        <div className="relative">
+          <div className="absolute right-0 bottom-0 flex gap-2 justify-end">
+            {footer.socials?.map((social) => (
+              <Link
+                key={social.id}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.platform}
+                className="hover:text-white"
+              >
+                {social.platform === 'facebook' && <FacebookLogoIcon size={80} />}
+                {social.platform === 'instagram' && <InstagramLogoIcon size={80} />}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
       <section className="bg-black text-white ">
         <div className="grid grid-cols-1 md:grid-cols-2 section-wrapper">
           <div className="flex flex-col justify-between py-3">
