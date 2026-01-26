@@ -3,6 +3,7 @@ import config from '@payload-config'
 import type { News } from '@/payload-types'
 import NewsArticle from '@/app/components/news/NewsArticle'
 import { notFound } from 'next/navigation'
+import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -30,7 +31,14 @@ const NewsPage = async ({ params }: PageProps) => {
     notFound()
   }
 
-  return <NewsArticle news={news} />
+  return (
+    <>
+      <Breadcrumbs
+        items={[{ label: 'Nyheter', href: '/nyheter' }, { label: news.title || 'Nyhet' }]}
+      />
+      <NewsArticle news={news} />
+    </>
+  )
 }
 
 export default NewsPage

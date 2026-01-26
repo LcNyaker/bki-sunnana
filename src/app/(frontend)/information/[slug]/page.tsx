@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { notFound } from 'next/navigation'
 import Info from '@/app/components/info/InfoArticle'
+import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -28,7 +29,17 @@ const InfoArticlePage = async ({ params }: PageProps) => {
     notFound()
   }
   console.log(article)
-  return <Info info={article} />
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          { label: 'Information', href: '/information' },
+          { label: article.title || 'Artikel' },
+        ]}
+      />
+      <Info info={article} />
+    </>
+  )
 }
 
 export default InfoArticlePage
