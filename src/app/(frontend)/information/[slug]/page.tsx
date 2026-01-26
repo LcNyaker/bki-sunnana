@@ -1,8 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { notFound } from 'next/navigation'
 import Info from '@/app/components/info/InfoArticle'
 import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
+import { notFound } from 'next/navigation'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -11,8 +11,6 @@ type PageProps = {
 const InfoArticlePage = async ({ params }: PageProps) => {
   const { slug } = await params
   const payload = await getPayload({ config })
-
-  // Hämta artikeln från info-articles collection
   const res = await payload.find({
     collection: 'info-articles',
     where: {
@@ -26,9 +24,9 @@ const InfoArticlePage = async ({ params }: PageProps) => {
   const article = res.docs[0]
 
   if (!article) {
-    notFound()
+    return notFound()
   }
-  console.log(article)
+
   return (
     <>
       <Breadcrumbs

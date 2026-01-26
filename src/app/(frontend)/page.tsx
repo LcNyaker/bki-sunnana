@@ -12,8 +12,8 @@ export default async function HomePage() {
   if (!page) {
     return (
       <div className="home">
-        <div className="content">
-          <h1>Home page not found</h1>
+        <div className="content flex justify-center items-center mt-10 section-wrapper px-4">
+          <h1>Sidan är under konstruktion... </h1>
         </div>
       </div>
     )
@@ -30,7 +30,7 @@ export default async function HomePage() {
         <div className="home">
           <div className="content">
             <h1>{page.title || 'Welcome'}</h1>
-            <p>This page has no content blocks yet.</p>
+            <p>Sidan har inga block</p>
           </div>
         </div>
       )}

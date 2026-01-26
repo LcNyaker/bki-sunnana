@@ -2,8 +2,8 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { News } from '@/payload-types'
 import NewsArticle from '@/app/components/news/NewsArticle'
-import { notFound } from 'next/navigation'
 import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
+import { notFound } from 'next/navigation'
 
 type PageProps = {
   params: Promise<{ slug: string }>

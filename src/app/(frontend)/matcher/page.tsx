@@ -5,9 +5,14 @@ import { getPageBySlug } from '@/lib/getPageBySlug'
 import Breadcrumbs from '@/app/components/fixtures/header/Breadcrumbs'
 import { RenderBlocks } from '@/app/components/RenderBlocks'
 import MatchesWrapper from '@/app/components/wrappers/MatchesWrapper'
+import { notFound } from 'next/navigation'
 
 const MatchesPage = async () => {
   const page = await getPageBySlug('matcher')
+
+  if (!page) {
+    return notFound()
+  }
 
   return (
     <main>
