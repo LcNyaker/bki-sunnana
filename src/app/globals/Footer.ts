@@ -3,7 +3,8 @@ import { GlobalConfig } from 'payload'
 export const Footer: GlobalConfig = {
   slug: 'footer',
   access: {
-    read: () => true, // Alla kan läsa footer
+    read: () => true,
+    update: () => true,
   },
   fields: [
     {
@@ -30,7 +31,6 @@ export const Footer: GlobalConfig = {
             {
               name: 'url',
               type: 'text',
-              required: true,
               admin: {
                 description: 'Relativ URL (t.ex. /about) eller absolut (https://...)',
               },
@@ -46,9 +46,9 @@ export const Footer: GlobalConfig = {
       ],
     },
     {
-      name: 'socialLinks',
+      name: 'socials',
       type: 'array',
-      label: 'Social Media',
+      label: 'Sociala Medier',
       fields: [
         {
           name: 'platform',
@@ -58,8 +58,6 @@ export const Footer: GlobalConfig = {
             { label: 'Facebook', value: 'facebook' },
             { label: 'Twitter/X', value: 'twitter' },
             { label: 'Instagram', value: 'instagram' },
-            { label: 'LinkedIn', value: 'linkedin' },
-            { label: 'GitHub', value: 'github' },
             { label: 'YouTube', value: 'youtube' },
           ],
         },
@@ -69,6 +67,36 @@ export const Footer: GlobalConfig = {
           required: true,
         },
       ],
+    },
+    {
+      name: 'contact',
+      type: 'array',
+      label: 'Kontaktuppgifter',
+      fields: [
+        {
+          name: 'postcode',
+          type: 'number',
+          label: 'postnummer',
+          required: true,
+        },
+        {
+          name: 'city',
+          type: 'text',
+          label: 'stad',
+          required: true,
+        },
+        {
+          name: 'email',
+          type: 'text',
+          label: 'epostadress',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'creds',
+      type: 'text',
+      label: 'Kreditering',
     },
     {
       name: 'copyrightText',

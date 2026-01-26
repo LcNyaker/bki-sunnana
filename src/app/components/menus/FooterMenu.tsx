@@ -15,9 +15,9 @@ const FooterMenu = ({ title, menuKey, items, isOpen, toggleMenu }: FooterMenuPro
     <div className="text-black">
       <button
         onClick={() => toggleMenu(menuKey)}
-        className="sm:pointer-none: flex cursor-pointer items-center justify-between gap-2 sm:pointer-events-none sm:cursor-default"
+        className="sm:pointer-none: flex cursor-pointer justify-between sm:pb-2 gap-2 sm:pointer-events-none sm:cursor-default"
       >
-        <h2 className="pb-4 font-sans font-bold text-lg">{title}</h2>
+        <h2 className="font-sans font-bold text-lg">{title}</h2>
         <CaretDownIcon
           size={32}
           className={`transition-transform duration-500 ${isOpen ? 'rotate-180' : ''} sm:hidden`}
@@ -25,7 +25,7 @@ const FooterMenu = ({ title, menuKey, items, isOpen, toggleMenu }: FooterMenuPro
       </button>
 
       <ul
-        className={`overflow-hidden transition-all duration-500 ease-in-out sm:overflow-visible ${
+        className={`overflow-hidden transition-all duration-500 ease-in-out sm:overflow-visible mb-2 ${
           isOpen
             ? 'max-h-96 opacity-100 sm:flex-col'
             : 'max-h-0 opacity-0 sm:max-h-96 sm:opacity-100'
