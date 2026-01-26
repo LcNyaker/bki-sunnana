@@ -1,3 +1,4 @@
+import { FloorballIcon } from '@/app/assets/Icons/FloorballIcon'
 import type { SeriesTable } from '@/types/everysport/ui/series-table'
 import Image from 'next/image'
 
@@ -23,11 +24,11 @@ const SeriesTable = ({ table }: SeriesTableProps) => {
               <tr>
                 <th className="w-10 text-left">#</th>
                 <th className="text-left">Lag</th>
-                <th className="w-12 text-right">M</th>
-                <th className="w-12 text-right">GM</th>
-                <th className="w-12 text-right hidden md:table-cell">+/-</th>
-                <th className="w-12 text-right">IM</th>
-                <th className="w-12 text-right">P</th>
+                <th className="w-12 text-right pr-2">M</th>
+                <th className="w-12 text-right pr-2">GM</th>
+                <th className="w-12 text-right hidden sm:table-cell pr-2">+/-</th>
+                <th className="w-12 text-right pr-2">IM</th>
+                <th className="w-12 text-right pr-2">P</th>
               </tr>
             </thead>
             <tbody>
@@ -36,27 +37,32 @@ const SeriesTable = ({ table }: SeriesTableProps) => {
                   <td className="py-1">{row.position}</td>
                   <td className="truncate pr-2">
                     <div className="flex items-center">
-                      {row.teamLogo && (
-                        <div className="relative w-6 h-6 flex-shrink-0">
+                      <div className="relative w-6 h-6 flex-shrink-0">
+                        {row.teamLogo ? (
                           <Image
                             src={row.teamLogo}
                             alt={row.teamName}
                             fill
                             className="object-contain"
                           />
-                        </div>
-                      )}
-                      <span className="truncate">{row.teamName}</span>
+                        ) : (
+                          <div>
+                            <FloorballIcon size={24} />
+                          </div>
+                        )}
+                      </div>
+
+                      <span className="truncate pl-2">{row.teamName}</span>
                     </div>
                   </td>
-                  <td className="text-right">{row.played}</td>
-                  <td className="text-right">{row.goalScored}</td>
-                  <td className="text-right hidden md:table-cell">
+                  <td className="text-right pr-2">{row.played}</td>
+                  <td className="text-right pr-2">{row.goalScored}</td>
+                  <td className="text-right hidden sm:table-cell pr-2">
                     {row.goalDifference > 0 ? '+' : ''}
                     {row.goalDifference}
                   </td>
-                  <td className="text-right">{row.goalsLetIn}</td>
-                  <td className="text-right font-semibold">{row.points}</td>
+                  <td className="text-right pr-2">{row.goalsLetIn}</td>
+                  <td className="text-right font-semibold pr-2">{row.points}</td>
                 </tr>
               ))}
             </tbody>

@@ -22,6 +22,10 @@ export const Pages: CollectionConfig = {
       required: true,
     },
     {
+      name: 'description',
+      type: 'text',
+    },
+    {
       name: 'slug',
       type: 'text',
       required: true,
