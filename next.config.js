@@ -22,7 +22,11 @@ const nextConfig = {
       }),
       {
         protocol: 'https',
-        hostname: '*.vercel.app',
+        hostname: '**.vercel.app',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.public.blob.vercel-storage.com',
       },
       {
         protocol: 'https',
@@ -32,10 +36,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: '*.public.blob.vercel-storage.com',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
       },
     ],
   },

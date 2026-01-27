@@ -22,7 +22,6 @@ const HeaderLayout = ({ nav }: HeaderLayoutProps) => {
               alt={logo?.alt || 'BKI Sunnana Logo'}
               width={70}
               height={70}
-              unoptimized
             />
           </Link>
           <DesktopNav items={nav.items} />
