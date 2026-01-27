@@ -75,7 +75,7 @@
     "autoprefixer": "^10.4.23",
     "copyfiles": "^2.4.1",
     "eslint": "8",
-    "eslint-config-next": "15.4.7",
+    "eslint-config-next": "16.1.5",
     "jsdom": "26.1.0",
     "lint-staged": "^16.2.7",
     "playwright": "1.56.1",
