@@ -30,7 +30,7 @@ const Breadcrumbs = ({ breadcrumbs, items }: BreadcrumbsProps) => {
   if (crumbs.length === 0) return null
 
   return (
-    <nav className="fixed top-[6.5rem] md:top-16 text-sm z-50 w-full flex justify-center md:bg-transparent bg-white">
+    <nav className="fixed top-[6.5rem] z-40 md:top-16 text-sm md:z-50 w-full flex justify-center md:bg-transparent bg-white">
       <ol
         className="
         flex items-center gap-2 section-wrapper py-2 md:justify-center"

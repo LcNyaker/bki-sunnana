@@ -14,7 +14,7 @@ type Props = {
 const MobileMenu = ({ open, setOpen, items }: Props) => {
   return (
     <>
-      {open && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setOpen(false)} />}
+      {open && <div className="fixed inset-0 bg-black/40 z-49" onClick={() => setOpen(false)} />}
 
       <aside
         className={`
