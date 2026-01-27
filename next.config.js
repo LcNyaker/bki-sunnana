@@ -22,12 +22,20 @@ const nextConfig = {
       }),
       {
         protocol: 'https',
+        hostname: '*.vercel.app',
+      },
+      {
+        protocol: 'https',
         hostname: 'cdn.api.everysport.com',
         pathname: '/logos/**',
       },
       {
         protocol: 'https',
         hostname: '*.public.blob.vercel-storage.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
       },
     ],
   },
