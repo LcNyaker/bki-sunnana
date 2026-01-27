@@ -22,11 +22,11 @@ const nextConfig = {
       }),
       {
         protocol: 'https',
-        hostname: '**.vercel.app',
+        hostname: 'bki-sunnana-*.vercel.app',
       },
       {
         protocol: 'https',
-        hostname: '**.public.blob.vercel-storage.com',
+        hostname: '*.public.blob.vercel-storage.com',
       },
       {
         protocol: 'https',
