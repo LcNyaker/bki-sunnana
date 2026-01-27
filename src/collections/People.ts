@@ -13,7 +13,9 @@ const ROLE_LABELS: Record<string, string> = {
 
 export const People: CollectionConfig = {
   slug: 'people',
-
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'fullName',
     defaultColumns: ['fullName', 'role', 'email', 'published'],
