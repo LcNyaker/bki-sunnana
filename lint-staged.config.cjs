@@ -1,5 +1,5 @@
 /** @type {import('lint-staged').Config} */
 module.exports = {
-  "*.{js,ts,tsx}": () => "pnpm lint",
-  "*.{css,scss}": "pnpm prettier --write",
-};
+  '*.{js,ts,tsx}': 'eslint --fix',
+  '*.{css,scss}': 'prettier --write',
+}
