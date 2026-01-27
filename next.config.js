@@ -8,7 +8,7 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    dirs: ['src'], // 👈 VIKTIG RAD
+    dirs: ['src'],
   },
   images: {
     remotePatterns: [
@@ -27,7 +27,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '88ffcdd54ba61a043b8cde2827a67cc2.r2.cloudflarestorage.com',
+        hostname: '*.public.blob.vercel-storage.com',
       },
     ],
   },

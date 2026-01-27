@@ -1,7 +1,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
-import { s3Storage } from '@payloadcms/storage-s3'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -78,25 +78,13 @@ export default buildConfig({
       generateLabel: (_, doc) => doc.title as string,
       generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
     }),
-    ...(process.env.VERCEL_ENV // Ladda S3 ENDAST på Vercel
+    ...(process.env.BLOB_READ_WRITE_TOKEN // ← VERCEL BLOB
       ? [
-          s3Storage({
+          vercelBlobStorage({
             collections: {
-              media: {
-                disableLocalStorage: true,
-                disablePayloadAccessControl: true,
-              },
+              media: true,
             },
-            bucket: process.env.S3_BUCKET!,
-            config: {
-              credentials: {
-                accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-                secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
-              },
-              region: process.env.S3_REGION!,
-              endpoint: process.env.S3_ENDPOINT!,
-              forcePathStyle: true,
-            },
+            token: process.env.BLOB_READ_WRITE_TOKEN!,
           }),
         ]
       : []),
