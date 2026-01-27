@@ -22,7 +22,7 @@ const nextConfig = {
       }),
       {
         protocol: 'https',
-        hostname: 'bki-sunnana-*.vercel.app',
+        hostname: 'bki-sunnana-*-lcnyakers-projects.vercel.app',
       },
       {
         protocol: 'https',
