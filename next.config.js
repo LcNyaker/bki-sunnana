@@ -11,6 +11,7 @@ const nextConfig = {
     dirs: ['src'],
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL].map((item) => {
         const url = new URL(item)
