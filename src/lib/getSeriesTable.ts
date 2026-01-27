@@ -60,8 +60,6 @@ export async function getSeriesTable(): Promise<SeriesTable | null> {
 
     const standings = data.groups[0].standings
 
-    console.log(standings)
-
     return {
       leagueName: data.league.name,
 

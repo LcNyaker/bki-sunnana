@@ -20,7 +20,6 @@ const DisplayLatestNews = async () => {
 
   const latest = newsRes.docs[0]
   const image = typeof latest.image === 'object' ? (latest.image as Media) : null
-  console.log(latest)
   const link = `/nyheter/${latest.slug}`
 
   return (

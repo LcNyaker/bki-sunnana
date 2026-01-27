@@ -26,7 +26,7 @@ const PlayerPage = async ({ params }: PageProps) => {
   })
 
   const player = res.docs[0]
-  console.log(player)
+
   if (!player) {
     notFound()
   }
