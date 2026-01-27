@@ -26,7 +26,6 @@ const FooterClient = ({ footer }: FooterProps) => {
     }))
   }
 
-  console.log(footer.socials)
   const menus = [
     {
       title: 'Föreningen',

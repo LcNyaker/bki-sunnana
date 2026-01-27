@@ -24,8 +24,6 @@ const PlayerCard = ({ player }: CardProps) => {
   const profileImage =
     typeof player.images?.profile === 'object' ? (player.images.profile as Media) : null
 
-  console.log('PLAYER OBJECT:', player)
-
   return (
     <Link href={`/trupper/${player.slug}`} className="group">
       <div className="flex flex-col xs:flex-row relative items-center gap-4 border p-4 group-hover:bg-gradient-to-r group-hover:from-secondary-400 group-hover:to-primary-500 group-focus:bg-gradient-to-r group-focus:from-secondary-400 group-focus:to-primary-500 rounded-md shadow-lg shadow-black/40 overflow-hidden">

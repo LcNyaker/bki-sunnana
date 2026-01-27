@@ -10,8 +10,6 @@ const InformationPage = async () => {
     return notFound()
   }
 
-  console.log(page)
-
   return (
     <>
       <Breadcrumbs breadcrumbs={page?.breadcrumbs} />

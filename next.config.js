@@ -25,6 +25,10 @@ const nextConfig = {
         hostname: 'cdn.api.everysport.com',
         pathname: '/logos/**',
       },
+      {
+        protocol: 'https',
+        hostname: '88ffcdd54ba61a043b8cde2827a67cc2.r2.cloudflarestorage.com',
+      },
     ],
   },
   webpack: (webpackConfig) => {

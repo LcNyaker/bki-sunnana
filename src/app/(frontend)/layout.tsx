@@ -44,7 +44,6 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  console.log(process.env.DATABASE_URI)
   return (
     <html lang="sv" className={`${inter.variable} ${poppins.variable}`}>
       <body className="flex flex-col">

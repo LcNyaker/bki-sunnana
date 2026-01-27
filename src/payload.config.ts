@@ -78,11 +78,14 @@ export default buildConfig({
       generateLabel: (_, doc) => doc.title as string,
       generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
     }),
-    ...(process.env.VERCEL_ENV
+    ...(process.env.VERCEL_ENV // Ladda S3 ENDAST på Vercel
       ? [
           s3Storage({
             collections: {
-              media: true,
+              media: {
+                disableLocalStorage: true,
+                disablePayloadAccessControl: true,
+              },
             },
             bucket: process.env.S3_BUCKET!,
             config: {
@@ -91,6 +94,8 @@ export default buildConfig({
                 secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
               },
               region: process.env.S3_REGION!,
+              endpoint: process.env.S3_ENDPOINT!,
+              forcePathStyle: true,
             },
           }),
         ]

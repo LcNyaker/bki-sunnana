@@ -25,8 +25,6 @@ const NewsPage = async ({ params }: PageProps) => {
 
   const news = res.docs[0] as News | undefined
 
-  console.log('Fetched news article:', news)
-
   if (!news) {
     notFound()
   }

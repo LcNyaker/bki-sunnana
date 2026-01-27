@@ -9,7 +9,6 @@ type NewsProps = {
 const NewsArticle = ({ news }: NewsProps) => {
   const heroImage = typeof news.image === 'object' ? (news.image as Media) : null
 
-  console.log(news.content)
   const authorName = (() => {
     if (news.author?.authorType === 'manual') {
       return news.author.manualName
