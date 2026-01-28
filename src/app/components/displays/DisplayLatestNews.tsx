@@ -29,7 +29,7 @@ const DisplayLatestNews = async () => {
           <h3 className="text-lg font-semibold">{latest.title}</h3>
         </div>
         <div className="group-hover:blur-sm transition duration-300">
-          <div className="w-full h-[300px] px-2 mb-2">
+          <div className="w-full h-[295px] px-2 mb-2">
             {image?.url && (
               <Image
                 src={image.url}
@@ -50,7 +50,7 @@ const DisplayLatestNews = async () => {
         bg-black/40
       "
         >
-          <Button>Läs mer</Button>
+          <Button ariaLabel={`Läs mer om ${latest.title}`}>Läs mer</Button>
         </div>
       </div>
     </Link>
