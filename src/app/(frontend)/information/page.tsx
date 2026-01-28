@@ -13,7 +13,15 @@ const InformationPage = async () => {
   return (
     <>
       <Breadcrumbs breadcrumbs={page?.breadcrumbs} />
-      <main>{page.layout && page.layout.length > 0 && <RenderBlocks layout={page.layout} />}</main>
+      <main>
+        <section className="mt-10 md:mt-8">
+          <div className="section-wrapper mb-8">
+            <h1 className="title-accent">{page.title}</h1>
+          </div>
+
+          {page.layout && page.layout.length > 0 && <RenderBlocks layout={page.layout} />}
+        </section>
+      </main>
     </>
   )
 }

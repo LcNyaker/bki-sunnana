@@ -22,7 +22,8 @@ const TeamsPage = async () => {
     <main>
       {page?.breadcrumbs && <Breadcrumbs breadcrumbs={page.breadcrumbs} />}
       {page?.layout && page.layout.length > 0 && (
-        <div className="section-wrapper">
+        <div className="section-wrapper mt-10">
+          <h1 className="title-accent sm:col-span-2 mb-4">{page.title}</h1>
           <RenderBlocks layout={page.layout} />
         </div>
       )}

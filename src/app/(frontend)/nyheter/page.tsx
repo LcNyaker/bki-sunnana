@@ -23,14 +23,18 @@ const NewsPage = async () => {
   return (
     <>
       <Breadcrumbs items={[{ label: 'Nyheter', href: '/nyheter' }]} />
-      <main className="section-wrapper mt-10">
-        <h1 className="text-3xl font-bold mb-8">Nyheter</h1>
+      <main>
+        <section className="mt-10 md:mt-8 section-wrapper">
+          <div className="mb-8">
+            <h1 className="title-accent">Nyheter</h1>
+          </div>
 
-        <div className="grid gap-6">
-          {newsRes.docs.map((news) => (
-            <NewsCard key={news.id} news={news} />
-          ))}
-        </div>
+          <div className="grid gap-6">
+            {newsRes.docs.map((news) => (
+              <NewsCard key={news.id} news={news} />
+            ))}
+          </div>
+        </section>
       </main>
     </>
   )

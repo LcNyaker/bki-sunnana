@@ -27,9 +27,9 @@ const PlayerDisplay = ({ player }: PlayerProps) => {
   }
 
   return (
-    <section className="mt-10 section-wrapper">
+    <section className="mt-10 md:mt-8 section-wrapper">
       <section className="relative grid grid-cols-1 sm:grid-cols-[1fr_1fr] lg:grid-cols-[260px_1fr] sm:gap-x-10 mb-10">
-        <h1 className="title-accent sm:col-span-2 mb-4">{player.fullName}</h1>
+        <h1 className="title-accent sm:col-span-2 mb-8">{player.fullName}</h1>
         {portrait?.url && (
           <AnimatedFrame className="relative aspect-[3/4] lg:w-[260px]">
             <Image

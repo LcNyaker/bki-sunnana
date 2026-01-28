@@ -25,7 +25,7 @@ const NewsArticle = ({ news }: NewsProps) => {
   return (
     <article className="section-wrapper max-w-3xl mt-10 mb-20">
       <header className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold">{news.title}</h1>
+        <h1 className="text-3xl md:text-4xl title-accent font-bold">{news.title}</h1>
 
         <div className="flex justify-between flex-col sm:flex-row">
           {news.subtitle && (

@@ -23,7 +23,7 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
 
   return (
     <>
-      <div className="w-full section-wrapper mt-10">
+      <div className="w-full mt-10">
         <div className="flex gap-4 justify-center mb-6">
           <button
             aria-label="Visa kommande matcher"
@@ -32,49 +32,49 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
               activeView === 'upcoming' ? 'underline' : 'opacity-50 hover:opacity-100'
             }`}
           >
-            Kommande
+            <h2>Kommande</h2>
           </button>
           <button
             aria-label="Visa result från spelade matcher"
             onClick={() => setActiveView('finished')}
             className={`text-2xl font-bold py-1 transition-opacity ${
-              activeView === 'finished' ? '' : 'opacity-50 hover:opacity-100'
+              activeView === 'finished' ? 'underline' : 'opacity-50 hover:opacity-100'
             }`}
           >
-            Resultat
+            <h2>Resultat</h2>
           </button>
         </div>
       </div>
 
-      <section className="w-full grid grid-cols-1 lg:grid-cols-5 gap-10 section-wrapper lg:gap-6">
+      <section className="w-full grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-6">
         <div className="lg:col-span-3 flex flex-col">
-          <h2 className="text-xl title-accent font-bold py-1 mb-2">
+          <h2 className="text-xl title-accent font-bold py-1 mb-4">
             {activeView === 'upcoming' ? 'Nästa match' : 'Senaste match'}
           </h2>
 
           {activeView === 'upcoming' && nextMatch && <NextMatchDisplay match={nextMatch} />}
           {activeView === 'upcoming' && !nextMatch && (
             <div className="border-2 shadow-lg shadow-black/40 p-4">
-              <p className="text-center">Inga kommande matcher</p>
+              <h3 className="text-center">Inga kommande matcher</h3>
             </div>
           )}
 
           {activeView === 'finished' && latestMatch && <LatestMatchDisplay match={latestMatch} />}
           {activeView === 'finished' && !latestMatch && (
             <div className="border-2 shadow-lg shadow-black/40 p-4">
-              <p className="text-center">Inga spelade matcher</p>
+              <h3 className="text-center">Inga spelade matcher</h3>
             </div>
           )}
         </div>
 
         <div className="lg:col-span-2 flex flex-col">
-          <h2 className="text-xl title-accent font-bold py-1 mb-2">Tabell</h2>
+          <h2 className="text-xl title-accent font-bold py-1 mb-4">Tabell</h2>
           {seriesTable}
         </div>
       </section>
 
       {/* Bottom Section: Kommande matcher eller Spelade matcher */}
-      <section className="w-full section-wrapper mt-20">
+      <section className="w-full mt-20">
         <h3 className="title-accent text-xl font-bold py-1 mb-4">
           {activeView === 'upcoming' ? 'Kommande matcher' : 'Spelade matcher'}
         </h3>
