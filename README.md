@@ -58,7 +58,8 @@ This project should be viewed as a design and technical concept rather than a pr
 
 ### Desktop
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+### Desktop
+![Desktop view](assets/homedesc.png)
 
 ### Mobile
 
