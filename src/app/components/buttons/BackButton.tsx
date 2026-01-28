@@ -13,10 +13,10 @@ const BackButton = ({ fallbackHref, fallTo }: BackButtonProps) => {
   const router = useRouter()
 
   const handleBack = () => {
-    if (fallbackHref) {
-      router.push(fallbackHref)
-    } else if (window.history.length > 1) {
+    if (window.history.length > 1) {
       router.back()
+    } else if (fallbackHref) {
+      router.push(fallbackHref)
     }
   }
 

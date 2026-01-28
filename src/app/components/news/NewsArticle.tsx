@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import type { News, Media, Person } from '@/payload-types'
 import NewsContentRenderer from './RenderNewsContent'
+import BackButton from '../buttons/BackButton'
 
 type NewsProps = {
   news: News
@@ -51,6 +52,9 @@ const NewsArticle = ({ news }: NewsProps) => {
       <section>
         <NewsContentRenderer content={news.content} />
       </section>
+      <div className="w-full flex justify-center">
+        <BackButton fallbackHref="/nyheter" />
+      </div>
     </article>
   )
 }
