@@ -43,7 +43,12 @@ const MobileMenu = ({ open, setOpen, items }: Props) => {
             }
 
             return (
-              <Link key={item.label} href={href} onClick={() => setOpen(false)}>
+              <Link
+                key={item.label}
+                href={href}
+                aria-label={`Gå till ${item.label}`}
+                onClick={() => setOpen(false)}
+              >
                 {item.label}
               </Link>
             )

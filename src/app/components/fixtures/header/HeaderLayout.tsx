@@ -16,7 +16,7 @@ const HeaderLayout = ({ nav }: HeaderLayoutProps) => {
     <header className="w-full bg-black sticky top-0 z-50 text-white">
       <section className="section-wrapper overflow-hidden">
         <div className="flex items-center justify-between">
-          <Link href="/" className="py-2 flex-1">
+          <Link href="/" className="py-2 flex-1" aria-label={`Gå till startsidan`}>
             <Image
               src={logo?.url || '/logo.png'}
               alt={logo?.alt || 'BKI Sunnana Logo'}

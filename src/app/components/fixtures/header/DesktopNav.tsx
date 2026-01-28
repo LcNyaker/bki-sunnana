@@ -22,6 +22,7 @@ const DesktopNav = ({ items }: DesktopNavProps) => {
           return (
             <li key={item.label}>
               <Link
+                aria-label={`Gå till ${item.label}`}
                 href={href}
                 className="
                   relative whitespace-nowrap

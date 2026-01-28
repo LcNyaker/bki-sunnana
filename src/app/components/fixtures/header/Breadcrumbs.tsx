@@ -39,6 +39,7 @@ const Breadcrumbs = ({ breadcrumbs, items }: BreadcrumbsProps) => {
           <Link
             href="/"
             className="text-gray-600 hover:text-gray-900  md:hover:text-white md:text-primary-500"
+            aria-label="Gå tillbaka till startsidan"
           >
             Hem
           </Link>
@@ -51,6 +52,7 @@ const Breadcrumbs = ({ breadcrumbs, items }: BreadcrumbsProps) => {
               {crumb.href && !isLast ? (
                 <Link
                   href={crumb.href}
+                  aria-label={`Gå till ${crumb.label}`}
                   className="text-gray-600 hover:text-gray-900 md:hover:text-white md:text-primary-500"
                 >
                   {crumb.label}

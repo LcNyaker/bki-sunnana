@@ -25,7 +25,11 @@ const PlayerCard = ({ player }: CardProps) => {
     typeof player.images?.profile === 'object' ? (player.images.profile as Media) : null
 
   return (
-    <Link href={`/trupper/${player.slug}`} className="group">
+    <Link
+      href={`/trupper/${player.slug}`}
+      className="group"
+      aria-label={`Läs mer om ${player.forename} ${player.lastname}`}
+    >
       <div className="flex flex-col xs:flex-row relative items-center gap-4 border p-4 group-hover:bg-gradient-to-r group-hover:from-secondary-400 group-hover:to-primary-500 group-focus:bg-gradient-to-r group-focus:from-secondary-400 group-focus:to-primary-500 rounded-md shadow-lg shadow-black/40 overflow-hidden">
         <div className="relative h-32 w-32 shrink-0 rounded-full overflow-hidden bg-neutral-200">
           {profileImage?.url && (
