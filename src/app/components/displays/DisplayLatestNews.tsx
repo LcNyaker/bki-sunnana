@@ -23,13 +23,13 @@ const DisplayLatestNews = async () => {
   const link = `/nyheter/${latest.slug}`
 
   return (
-    <Link href={link} className="group block">
+    <Link href={link} className="group block" aria-label={`Läs mer om ${latest.title}`}>
       <div className="relative border-2 shadow-lg shadow-black/40 overflow-hidden rounded-md">
         <div className="relative z-10 flex justify-center py-2 bg-white">
           <h3 className="text-lg font-semibold">{latest.title}</h3>
         </div>
         <div className="group-hover:blur-sm transition duration-300">
-          <div className="w-full h-[300px] px-2 mb-2">
+          <div className="w-full h-[295px] px-2 mb-2">
             {image?.url && (
               <Image
                 src={image.url}
@@ -50,7 +50,7 @@ const DisplayLatestNews = async () => {
         bg-black/40
       "
         >
-          <Button>Läs mer</Button>
+          <Button ariaLabel={`Läs mer om ${latest.title}`}>Läs mer</Button>
         </div>
       </div>
     </Link>

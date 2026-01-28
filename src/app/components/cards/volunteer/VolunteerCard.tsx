@@ -54,9 +54,7 @@ const VolunteerCard = ({ person }: CardProps) => {
                   underline-offset-4
                   group-hover:underline
                   group-hover:text-black
-                  focus-visible:underline
-                  focus-visible:outline-none
-                  focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
+                  focus:outline-2 focus:outline-offset-[-2px]
                   transition
                 "
                 aria-label={`Skicka e-post till ${person.fullName}`}
@@ -76,9 +74,7 @@ const VolunteerCard = ({ person }: CardProps) => {
               underline-offset-4
               group-hover:underline
               group-hover:text-black
-              focus-visible:underline
-              focus-visible:outline-none
-              focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
+              focus:outline-2 focus:outline-offset-[-2px]
               transition
               "
                 aria-label={`Ring till ${person.fullName}`}

@@ -8,10 +8,13 @@ type VolunteersBlockProps = {
 
 export const VolunteersBlock = ({ title, description }: VolunteersBlockProps) => {
   return (
-    <section className="w-full section-wrapper flex flex-col items-center gap-12 mt-10">
+    <section className="w-full section-wrapper md:mt-8 mt-10">
+      <div className="mb-8">
+        <h1 className="title-accent">Om oss</h1>
+      </div>
       <div className="w-full">
-        <div className="pb-4 mb-10">
-          {title && <h1 className="text-center text-4xl">{title}</h1>}
+        <div className="px-4">
+          {title && <h2 className="text-center text-4xl">{title}</h2>}
           {description && (
             <p className="mt-4 text-center max-w-3xl mx-auto text-gray-700">{description}</p>
           )}

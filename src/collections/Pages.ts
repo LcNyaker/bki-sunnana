@@ -12,6 +12,9 @@ export const Pages: CollectionConfig = {
     singular: 'Page',
     plural: 'Pages',
   },
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'title',
   },

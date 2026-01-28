@@ -20,19 +20,16 @@ const baseClasses = `
   font-medium
   rounded-md
   transition-all duration-200
-  focus-visible:outline-none
-  focus-visible:ring-2
-  focus-visible:ring-offset-2
-  focus-visible:ring-black
   disabled:opacity-50
   disabled:cursor-not-allowed
 `
 
 const variants: Record<ButtonVariant, string> = {
   primary: `
-    bg-[var(--primary-500)]
-    text-[var(--black)]
-    hover:bg-[var(--secondary-500)]
+    bg-[var(--black)]
+    text-[var(--white)]
+    hover:bg-[var(--white)]
+    hover:text-[var(--black)]
     hover:font-bold
     hover:scale-110
     active:translate-y-0

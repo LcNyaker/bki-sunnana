@@ -37,15 +37,13 @@ const CoachCard = ({ coach }: CardProps) => {
               <Link
                 href={`mailto:${coach.email}`}
                 className="
-              inline-flex items-center gap-1
-              underline-offset-4
-              group-hover:underline
-              group-hover:text-black
-              focus-visible:underline
-              focus-visible:outline-none
-              focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
-              transition
-              "
+                inline-flex items-center gap-1
+                underline-offset-4
+                group-hover:underline
+                group-hover:text-black
+                focus:outline-2 focus:outline-offset-[-2px] 
+                transition
+                "
                 aria-label={`Skicka e-post till ${coach.forename} ${coach.lastname}`}
               >
                 <EnvelopeIcon aria-hidden="true" className="group-hover:text-black" />
@@ -58,15 +56,13 @@ const CoachCard = ({ coach }: CardProps) => {
               <a
                 href={`tel:${phoneHref}`}
                 className="
-              inline-flex items-center gap-1
-              underline-offset-4
-              group-hover:underline
-              group-hover:text-black
-              focus-visible:underline
-              focus-visible:outline-none
-              focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
-              transition
-              "
+                inline-flex items-center gap-1
+                underline-offset-4
+                group-hover:underline
+                group-hover:text-black
+                focus:outline-2 focus:outline-offset-[-2px]
+                transition
+                "
                 aria-label={`Ring till ${coach.forename} ${coach.lastname}`}
               >
                 <PhoneIcon aria-hidden="true" className="group-hover:text-black" />

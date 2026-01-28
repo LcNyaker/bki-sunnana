@@ -29,6 +29,7 @@ export const SponsorBlock = async () => {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center min-w-[160px]"
+              aria-label={`${sponsor.name} - öppnas i nytt fönster`}
             >
               {typeof sponsor.logo === 'object' && sponsor.logo?.url && (
                 <Image

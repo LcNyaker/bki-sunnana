@@ -11,6 +11,7 @@ const nextConfig = {
     dirs: ['src'],
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL].map((item) => {
         const url = new URL(item)
@@ -20,6 +21,14 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      {
+        protocol: 'https',
+        hostname: 'bki-sunnana-*-lcnyakers-projects.vercel.app',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
       {
         protocol: 'https',
         hostname: 'cdn.api.everysport.com',
