@@ -58,10 +58,48 @@ This project should be viewed as a design and technical concept rather than a pr
 
 ### Desktop
 
-### Desktop
 ![Desktop view](assets/homedesc.png)
 
+![Desktop view](assets/newsdesc.png)
+
+![Desktop view](assets/newsarticledesc.png)
+
+![Desktop view](assets/matchdesc.png)
+
+![Desktop view](assets/teamdesc.png)
+
+![Desktop view](assets/playerdesc.png)
+
+![Desktop view](assets/iformationdesc.png)
+
+![Desktop view](assets/infoarticledescdesc.png)
+
+![Desktop view](assets/aboutdesc.png)
+
+![Desktop view](assets/notfoundesc.png)
+
+
 ### Mobile
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
+
+![Desktop view](assets/homedesc.png)
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
