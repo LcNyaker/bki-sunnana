@@ -57,7 +57,7 @@ const FooterClient = ({ footer }: FooterProps) => {
   return (
     <footer className="w-full bg-secondary-500">
       <div className="section-wrapper">
-        <section className="grid grid-cols-1 sm:grid-cols-3 sm:gap-6 md:grid-cols-5 md:py-10">
+        <section className="grid grid-cols-1 sm:grid-cols-3 sm:gap-6 md:grid-cols-5 pb-20 pt-10 sm:pb-10 ">
           {menus.map((menu) => (
             <FooterMenu
               key={menu.key}
@@ -70,7 +70,7 @@ const FooterClient = ({ footer }: FooterProps) => {
           ))}
         </section>
         <div className="relative">
-          <div className="absolute right-0 bottom-0 flex gap-2 justify-end">
+          <div className="absolute -left-2 sm:right-0 bottom-0 flex gap-2 justify-end">
             {footer.socials?.map((social) => (
               <Link
                 key={social.id}
@@ -80,8 +80,8 @@ const FooterClient = ({ footer }: FooterProps) => {
                 aria-label={social.platform}
                 className="hover:text-white"
               >
-                {social.platform === 'facebook' && <FacebookLogoIcon size={80} />}
-                {social.platform === 'instagram' && <InstagramLogoIcon size={80} />}
+                {social.platform === 'facebook' && <FacebookLogoIcon size={70} />}
+                {social.platform === 'instagram' && <InstagramLogoIcon size={70} />}
               </Link>
             ))}
           </div>

@@ -24,7 +24,7 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
   return (
     <>
       <div className="w-full mt-10">
-        <div className="flex gap-4 justify-center mb-6">
+        <div className="flex gap-4 sm:justify-center mb-6 flex-col sm:flex-row">
           <button
             aria-label="Visa kommande matcher"
             onClick={() => setActiveView('upcoming')}
