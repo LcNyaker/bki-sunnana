@@ -82,7 +82,7 @@ This project should be viewed as a design and technical concept rather than a pr
 
 ### Information-pages
 
-![Desktop view](assets/iformationdesc.png)
+![Desktop view](assets/informationdesc.png)
 
 ![Desktop view](assets/infoarticledesc.png)
 
@@ -92,7 +92,7 @@ This project should be viewed as a design and technical concept rather than a pr
 
 ### 404-page
 
-![Mobile view](assets/notfoundesc.png)
+![Mobile view](assets/notfounddesc.png)
 
 
 ### Mobile
@@ -119,7 +119,7 @@ This project should be viewed as a design and technical concept rather than a pr
 
 ### Information-pages
 
-![Mobile view](assets/iformationmobile.png)
+![Mobile view](assets/informationmobile.png)
 
 ![Mobile view](assets/infoarticlemobile.png)
 
