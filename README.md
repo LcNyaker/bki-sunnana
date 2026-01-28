@@ -58,50 +58,78 @@ This project should be viewed as a design and technical concept rather than a pr
 
 ### Desktop
 
+### Landing-page
+
 ![Desktop view](assets/homedesc.png)
+
+### News-pages
 
 ![Desktop view](assets/newsdesc.png)
 
 ![Desktop view](assets/newsarticledesc.png)
 
+### Matches-page
+
 ![Desktop view](assets/matchdesc.png)
+
+### Team-page
 
 ![Desktop view](assets/teamdesc.png)
 
+### Player-page
+
 ![Desktop view](assets/playerdesc.png)
+
+### Information-pages
 
 ![Desktop view](assets/iformationdesc.png)
 
-![Desktop view](assets/infoarticledescdesc.png)
+![Desktop view](assets/infoarticledesc.png)
+
+### About-page
 
 ![Desktop view](assets/aboutdesc.png)
 
-![Desktop view](assets/notfoundesc.png)
+### 404-page
+
+![Mobile view](assets/notfoundesc.png)
 
 
 ### Mobile
 
-![Desktop view](assets/homedesc.png)
+![Mobile view](assets/homemobile.png)
 
-![Desktop view](assets/homedesc.png)
+### News-pages
 
-![Desktop view](assets/homedesc.png)
+![Mobile view](assets/newsmobile.png)
 
-![Desktop view](assets/homedesc.png)
+![Mobile view](assets/newsarticlemobile.png)
 
-![Desktop view](assets/homedesc.png)
+### Matches-page
 
-![Desktop view](assets/homedesc.png)
+![Mobile view](assets/matchmobile.png)
 
-![Desktop view](assets/homedesc.png)
+### Team-page
 
-![Desktop view](assets/homedesc.png)
+![Mobile view](assets/teammobile.png)
 
-![Desktop view](assets/homedesc.png)
+### Player-page
 
-![Desktop view](assets/homedesc.png)
+![Mobile view](assets/playermobile.png)
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+### Information-pages
+
+![Mobile view](assets/iformationmobile.png)
+
+![Mobile view](assets/infoarticlemobile.png)
+
+### About-page
+
+![Mobile view](assets/aboutmobile.png)
+
+### 404-page
+
+![Mobile view](assets/notfoundmobile.png)
 
 
 ## 👥Target Audience
@@ -159,7 +187,7 @@ Accessibility and performance were evaluated using Lighthouse.
 
 ### Lighthouse Results
 
-![Lighthouse – Desktop](./screenshots/lighthouse-desktop.png)
+![Lighthouse – Desktop](./assets/lighthouse.png)
 
 ### Accessibility Focus
 
