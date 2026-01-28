@@ -341,7 +341,7 @@ References
 
 - [Everysport API](https://app.swaggerhub.com/apis-docs/esmg/Everysport/1.0) – Match schedules and league table data provided by [Everysport](https://www.everysport.com)
 
-## Local sports club websites for inspiration
+## 💡Local sports club websites for inspiration
 
 - [Färjestad BK](https://www.farjestadbk.se/)
 
