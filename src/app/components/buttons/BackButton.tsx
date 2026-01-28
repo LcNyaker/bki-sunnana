@@ -22,6 +22,7 @@ const BackButton = ({ fallbackHref, fallTo }: BackButtonProps) => {
 
   return (
     <Button
+      ariaLabel="Gå tillbaka"
       variant="secondary"
       className="flex items-center justify-center gap-2 w-full text-sm md:text-base"
       onClick={handleBack}

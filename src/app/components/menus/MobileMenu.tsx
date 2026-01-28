@@ -26,7 +26,7 @@ const MobileMenu = ({ open, setOpen, items }: Props) => {
       >
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <span className="text-lg font-semibold">Meny</span>
-          <button onClick={() => setOpen(false)}>
+          <button aria-label="Stäng mobilmeny" onClick={() => setOpen(false)}>
             <XIcon size={28} />
           </button>
         </div>

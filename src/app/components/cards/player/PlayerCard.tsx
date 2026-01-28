@@ -38,21 +38,19 @@ const PlayerCard = ({ player }: CardProps) => {
           )}
         </div>
         <div className="flex-1">
-          <p className="font-semibold text-lg mb-2">
+          <p className="font-semibold text-lg mb-2 whitespace-nowrap">
             {player.forename} {player.lastname}
           </p>
           <ul className="space-y-1 text-sm text-gray-600">
             <li>Position: {player.position === 'goalie' ? 'Målvakt' : player.position}</li>
 
             <li>Ålder: {getAge(player.dateOfBirth)}</li>
-
-            {/*   {player.stickSide !== 'none' && <li className="">Skottfattning: {player.stickSide}</li>} */}
           </ul>
         </div>
         <span
           className="
-          sm:absolute bottom-3 right-3
-          text-6xl md:text-8xl font-extrabold
+          absolute bottom-3 right-3
+          text-5xl md:text-8xl font-extrabold
           bg-gradient-to-r from-primary-500 to-primary-200
           bg-clip-text text-transparent
           select-none pointer-events-none

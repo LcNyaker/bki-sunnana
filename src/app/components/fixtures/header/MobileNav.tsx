@@ -20,7 +20,7 @@ const MobileNav = ({ items }: MobileNavProps) => {
 
   return (
     <>
-      <button className="md:hidden" aria-label="Open menu" onClick={() => setOpen(true)}>
+      <button className="md:hidden" aria-label="Open mobilmenu" onClick={() => setOpen(true)}>
         <ListIcon size={32} />
       </button>
 

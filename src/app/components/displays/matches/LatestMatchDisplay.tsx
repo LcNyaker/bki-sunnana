@@ -8,15 +8,15 @@ type LatestMatchProps = {
 const LatestMatchDisplay = ({ match }: LatestMatchProps) => {
   if (!match) {
     return (
-      <section className="border-2 shadow-lg shadow-black/40 p-4">
+      <section className="border-2 shadow-lg shadow-black/40 p-4 h-full">
         <p className="text-center opacity-70">Kunde inte hämta senaste match</p>
       </section>
     )
   }
 
   return (
-    <section className="border-2 shadow-lg shadow-black/40 p-4">
-      <div className="flex justify-start items-center mb-4">
+    <section className="border-2 shadow-lg shadow-black/40 p-4 flex flex-col justify-center h-full">
+      <div className="flex justify-start items-start flex-1">
         <span className="text-sm font-semibold opacity-70">Omgång {match.round}</span>
       </div>
 
@@ -53,10 +53,7 @@ const LatestMatchDisplay = ({ match }: LatestMatchProps) => {
           <span className="font-semibold">{match.awayTeam.name}</span>
         </div>
       </div>
-
-      <div className="flex flex-col items-center mt-6 gap-1 text-sm">
-        <span className="opacity-70">{match.leagueName}</span>
-      </div>
+      <div className="flex flex-col items-center my-6 gap-1 flex-1 text-sm"></div>
     </section>
   )
 }

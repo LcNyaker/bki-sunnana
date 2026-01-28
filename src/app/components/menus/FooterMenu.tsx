@@ -14,6 +14,7 @@ const FooterMenu = ({ title, menuKey, items, isOpen, toggleMenu }: FooterMenuPro
   return (
     <div className="text-black">
       <button
+        aria-label={`Öppna meny för ${title}`}
         onClick={() => toggleMenu(menuKey)}
         className="sm:pointer-none: flex cursor-pointer justify-between sm:pb-2 gap-2 sm:pointer-events-none sm:cursor-default"
       >

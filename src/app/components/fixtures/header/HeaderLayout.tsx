@@ -26,8 +26,10 @@ const HeaderLayout = ({ nav }: HeaderLayoutProps) => {
           </Link>
           <DesktopNav items={nav.items} />
           <div className="relative hidden md:flex flex-1 justify-center">
-            <div className="absolute -top-20 right-0 text-gray-700">
-              <FloorballIcon size={150} />
+            <div className="hidden lg:flex">
+              <div className="absolute -top-20 right-0 text-gray-700">
+                <FloorballIcon size={150} />
+              </div>
             </div>
           </div>
           <MobileNav items={nav.items} />

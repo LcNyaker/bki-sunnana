@@ -26,6 +26,7 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
       <div className="w-full section-wrapper mt-10">
         <div className="flex gap-4 justify-center mb-6">
           <button
+            aria-label="Visa kommande matcher"
             onClick={() => setActiveView('upcoming')}
             className={`text-2xl font-bold py-1 transition-opacity ${
               activeView === 'upcoming' ? 'underline' : 'opacity-50 hover:opacity-100'
@@ -34,6 +35,7 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
             Kommande
           </button>
           <button
+            aria-label="Visa result från spelade matcher"
             onClick={() => setActiveView('finished')}
             className={`text-2xl font-bold py-1 transition-opacity ${
               activeView === 'finished' ? '' : 'opacity-50 hover:opacity-100'
@@ -44,7 +46,7 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
         </div>
       </div>
 
-      <section className="w-full grid grid-cols-1 items-stretch lg:grid-cols-5 gap-10 section-wrapper lg:gap-6">
+      <section className="w-full grid grid-cols-1 lg:grid-cols-5 gap-10 section-wrapper lg:gap-6">
         <div className="lg:col-span-3 flex flex-col">
           <h2 className="text-xl title-accent font-bold py-1 mb-2">
             {activeView === 'upcoming' ? 'Nästa match' : 'Senaste match'}
@@ -65,7 +67,7 @@ const MatchesClient = ({ upcomingMatches, finishedMatches, seriesTable }: Matche
           )}
         </div>
 
-        <div className="lg:col-span-2 flex flex-col h-full">
+        <div className="lg:col-span-2 flex flex-col">
           <h2 className="text-xl title-accent font-bold py-1 mb-2">Tabell</h2>
           {seriesTable}
         </div>
