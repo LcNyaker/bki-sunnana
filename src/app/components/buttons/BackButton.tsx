@@ -13,15 +13,16 @@ const BackButton = ({ fallbackHref, fallTo }: BackButtonProps) => {
   const router = useRouter()
 
   const handleBack = () => {
-    if (fallbackHref) {
-      router.push(fallbackHref)
-    } else if (window.history.length > 1) {
+    if (window.history.length > 1) {
       router.back()
+    } else if (fallbackHref) {
+      router.push(fallbackHref)
     }
   }
 
   return (
     <Button
+      ariaLabel="Gå tillbaka"
       variant="secondary"
       className="flex items-center justify-center gap-2 w-full text-sm md:text-base"
       onClick={handleBack}

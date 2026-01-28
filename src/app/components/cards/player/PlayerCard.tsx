@@ -25,7 +25,11 @@ const PlayerCard = ({ player }: CardProps) => {
     typeof player.images?.profile === 'object' ? (player.images.profile as Media) : null
 
   return (
-    <Link href={`/trupper/${player.slug}`} className="group">
+    <Link
+      href={`/trupper/${player.slug}`}
+      className="group"
+      aria-label={`Läs mer om ${player.forename} ${player.lastname}`}
+    >
       <div className="flex flex-col xs:flex-row relative items-center gap-4 border p-4 group-hover:bg-gradient-to-r group-hover:from-secondary-400 group-hover:to-primary-500 group-focus:bg-gradient-to-r group-focus:from-secondary-400 group-focus:to-primary-500 rounded-md shadow-lg shadow-black/40 overflow-hidden">
         <div className="relative h-32 w-32 shrink-0 rounded-full overflow-hidden bg-neutral-200">
           {profileImage?.url && (
@@ -38,21 +42,19 @@ const PlayerCard = ({ player }: CardProps) => {
           )}
         </div>
         <div className="flex-1">
-          <p className="font-semibold text-lg mb-2">
+          <p className="font-semibold text-lg mb-2 whitespace-nowrap">
             {player.forename} {player.lastname}
           </p>
           <ul className="space-y-1 text-sm text-gray-600">
             <li>Position: {player.position === 'goalie' ? 'Målvakt' : player.position}</li>
 
             <li>Ålder: {getAge(player.dateOfBirth)}</li>
-
-            {/*   {player.stickSide !== 'none' && <li className="">Skottfattning: {player.stickSide}</li>} */}
           </ul>
         </div>
         <span
           className="
-          sm:absolute bottom-3 right-3
-          text-6xl md:text-8xl font-extrabold
+          absolute bottom-3 right-3
+          text-5xl md:text-8xl font-extrabold
           bg-gradient-to-r from-primary-500 to-primary-200
           bg-clip-text text-transparent
           select-none pointer-events-none

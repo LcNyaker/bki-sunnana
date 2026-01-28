@@ -14,7 +14,7 @@ type Props = {
 const MobileMenu = ({ open, setOpen, items }: Props) => {
   return (
     <>
-      {open && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setOpen(false)} />}
+      {open && <div className="fixed inset-0 bg-black/40 z-49" onClick={() => setOpen(false)} />}
 
       <aside
         className={`
@@ -26,7 +26,7 @@ const MobileMenu = ({ open, setOpen, items }: Props) => {
       >
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <span className="text-lg font-semibold">Meny</span>
-          <button onClick={() => setOpen(false)}>
+          <button aria-label="Stäng mobilmeny" onClick={() => setOpen(false)}>
             <XIcon size={28} />
           </button>
         </div>
@@ -43,7 +43,12 @@ const MobileMenu = ({ open, setOpen, items }: Props) => {
             }
 
             return (
-              <Link key={item.label} href={href} onClick={() => setOpen(false)}>
+              <Link
+                key={item.label}
+                href={href}
+                aria-label={`Gå till ${item.label}`}
+                onClick={() => setOpen(false)}
+              >
                 {item.label}
               </Link>
             )

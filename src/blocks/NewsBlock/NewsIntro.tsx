@@ -34,7 +34,12 @@ export const NewsIntro = ({ title, undertitle, bodyText, link, textClass }: News
           {bodyText && <p className="mt-4  text-lg line-clamp-4 lg:line-clamp-5">{bodyText}</p>}
 
           {link && (
-            <Button className="mt-4 flex gap-2" href={link.url} variant="secondary">
+            <Button
+              className="mt-4 flex gap-2"
+              href={link.url}
+              variant="secondary"
+              aria-label={`Läs mer om ${title}`}
+            >
               {link.text}
               <ArrowRightIcon size={20} />
             </Button>

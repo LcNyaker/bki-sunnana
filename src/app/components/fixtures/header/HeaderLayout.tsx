@@ -16,7 +16,7 @@ const HeaderLayout = ({ nav }: HeaderLayoutProps) => {
     <header className="w-full bg-black sticky top-0 z-50 text-white">
       <section className="section-wrapper overflow-hidden">
         <div className="flex items-center justify-between">
-          <Link href="/" className="py-2 flex-1">
+          <Link href="/" className="py-2 flex-1" aria-label={`Gå till startsidan`}>
             <Image
               src={logo?.url || '/logo.png'}
               alt={logo?.alt || 'BKI Sunnana Logo'}
@@ -26,8 +26,10 @@ const HeaderLayout = ({ nav }: HeaderLayoutProps) => {
           </Link>
           <DesktopNav items={nav.items} />
           <div className="relative hidden md:flex flex-1 justify-center">
-            <div className="absolute -top-20 right-0 text-gray-700">
-              <FloorballIcon size={150} />
+            <div className="hidden lg:flex">
+              <div className="absolute -top-20 right-0 text-gray-700">
+                <FloorballIcon size={150} />
+              </div>
             </div>
           </div>
           <MobileNav items={nav.items} />

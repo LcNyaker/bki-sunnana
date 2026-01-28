@@ -14,7 +14,7 @@ const HotspotButton = ({ x, y, onHover }: HotspotButtonProps) => {
         transform: 'translate(-50%, -50%)',
       }}
       onMouseEnter={onHover}
-      aria-label="Spot Button for viewing players through the team image"
+      aria-label="Visa bild på spelare"
     />
   )
 }

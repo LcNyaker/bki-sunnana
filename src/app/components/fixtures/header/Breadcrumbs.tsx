@@ -30,7 +30,7 @@ const Breadcrumbs = ({ breadcrumbs, items }: BreadcrumbsProps) => {
   if (crumbs.length === 0) return null
 
   return (
-    <nav className="fixed top-[6.5rem] md:top-16 text-sm z-50 w-full flex justify-center md:bg-transparent bg-white">
+    <nav className="fixed top-[6.5rem] z-40 md:top-16 text-sm md:z-50 w-full flex justify-center md:bg-transparent bg-white">
       <ol
         className="
         flex items-center gap-2 section-wrapper py-2 md:justify-center"
@@ -39,6 +39,7 @@ const Breadcrumbs = ({ breadcrumbs, items }: BreadcrumbsProps) => {
           <Link
             href="/"
             className="text-gray-600 hover:text-gray-900  md:hover:text-white md:text-primary-500"
+            aria-label="Gå tillbaka till startsidan"
           >
             Hem
           </Link>
@@ -51,6 +52,7 @@ const Breadcrumbs = ({ breadcrumbs, items }: BreadcrumbsProps) => {
               {crumb.href && !isLast ? (
                 <Link
                   href={crumb.href}
+                  aria-label={`Gå till ${crumb.label}`}
                   className="text-gray-600 hover:text-gray-900 md:hover:text-white md:text-primary-500"
                 >
                   {crumb.label}
