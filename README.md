@@ -4,6 +4,11 @@
 
 This repository contains the source code for BKI Sunnanå, a modern, accessible, and content-driven website built as a degree project.
 
+All visual content such as images is AI-generated, and all written content including articles, policy texts, and informational pages is **fictitious** and created solely for demonstration purposes.  
+All names, phone numbers, and email addresses used in the project are fictional and do not represent real individuals.
+
+The only real data used in the project is match schedules, results, and league table information, which is fetched from the [Everysport API](https://app.swaggerhub.com/apis-docs/esmg/Everysport/1.0) for educational and non-commercial use.
+
 ## 🔍Project Overview
 
 The goal of this project is to design and develop a conceptual, user-centered proposal for how a local sports club website could look and function with improved design, accessibility, and structure. The project is not intended to replace the existing club website, but instead to explore and demonstrate how a modern, accessible, and content-driven solution could improve the overall user experience compared to the current platform (hosted on a third-party service), which limits design freedom, accessibility, and long-term scalability. By using Payload CMS, Next.js, and Tailwind CSS, this project aims to:
@@ -17,6 +22,7 @@ The goal of this project is to design and develop a conceptual, user-centered pr
 - Create a scalable foundation for future features
 
 - This project is developed as part of a Degree Project (Examensarbete) at Medieinstitutet.
+
 ## 📑 Table of Contents
 
 - [🔍 Project Overview](#project-overview)
@@ -142,6 +148,7 @@ This project should be viewed as a design and technical concept rather than a pr
 - Academic / Professional: Teachers, examiners, and developers reviewing the project as a design and technical case study
 
 The project is aimed at demonstrating value through comparison and improvement, rather than deployment.
+
 ## 🏗️Application Structure
 
 The application is built as a public-facing website with optional authentication.
@@ -176,12 +183,12 @@ This integration demonstrates how third-party sports data can be structured, pre
 
 - 404 page
 
-
 ### CMS / Admin
 
 Admin login via Payload CMS
 
 CRUD functionality for pages, news, teams, people, media, and blocks
+
 ## ♿ Accessibility & Performance
 
 Accessibility and performance were evaluated using Lighthouse.
@@ -211,6 +218,7 @@ Accessibility is a core part of the project and follows WCAG AA guidelines:
 - Manual keyboard testing
 
 - Lighthouse audits
+  
 ## 🧪Testing Strategy
 
 - Manual testing via GitHub Issues
@@ -220,6 +228,7 @@ Accessibility is a core part of the project and follows WCAG AA guidelines:
 - CI/CD with GitHub Actions
 
 - Husky for pre-commit linting and quality checks
+  
 ## 🛠Tech Stack
 
 ### Frontend
@@ -277,6 +286,7 @@ Accessibility is a core part of the project and follows WCAG AA guidelines:
 - Relationship fields instead of foreign keys
 
 - Central Media collection reused across entities
+
 ## 🚀 Run Locally
 
 Follow the steps below to run the project locally.
@@ -346,6 +356,7 @@ References
 - [Färjestad BK](https://www.farjestadbk.se/)
 
 - [Karlstad IBK](https://www.karlstadinnebandy.se/)
+  
 ## 🎉Data Attribution🎉
 
 Match and league table data is provided by [Everysport](https://www.everysport.com).
