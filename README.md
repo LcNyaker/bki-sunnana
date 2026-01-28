@@ -54,9 +54,10 @@ This project should be viewed as a design and technical concept rather than a pr
 - Act as inspiration or reference for future redesigns
 
 - Showcase how accessibility, usability, and content structure can coexist in a club website
+
 ## Screenshots from the project
 
-### Desktop
+### 💻Desktop💻
 
 ### Landing-page
 
@@ -95,7 +96,7 @@ This project should be viewed as a design and technical concept rather than a pr
 ![Mobile view](assets/notfounddesc.png)
 
 
-### Mobile
+### 📱Mobile📱
 
 ![Mobile view](assets/homemobile.png)
 
