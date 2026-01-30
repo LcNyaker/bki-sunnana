@@ -19,8 +19,8 @@ export const SponsorBlock = async () => {
   if (!sponsorsWithLogo.length) return null
 
   return (
-    <section className="w-full overflow-hidden bg-white py-4 mb-10 ">
-      <div className="relative w-full overflow-hidden">
+    <section className="w-full overflow-hidden bg-white py-4 mb-10">
+      <div className="relative">
         <div className="flex w-max animate-marquee gap-4 hover:[animation-play-state:paused]">
           {[...sponsors.docs, ...sponsors.docs, ...sponsors.docs].map((sponsor, index) => (
             <a
