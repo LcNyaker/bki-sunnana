@@ -13,7 +13,7 @@ const DisplayLatestNews = async () => {
     where: {
       published: { equals: true },
     },
-    sort: '-createdAt',
+    sort: '-publishedAt',
     limit: 1,
     depth: 1,
   })
@@ -37,6 +37,7 @@ const DisplayLatestNews = async () => {
                 width={image.width ?? 300}
                 height={image.height ?? 300}
                 className="object-cover object-top w-full h-full rounded-md"
+                loading="lazy"
               />
             )}
           </div>

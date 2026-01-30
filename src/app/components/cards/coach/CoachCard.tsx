@@ -22,6 +22,7 @@ const CoachCard = ({ coach }: CardProps) => {
             alt={image?.alt || `${coach.forename} ${coach.lastname}`}
             fill
             className="object-cover object-top"
+            loading="lazy"
           />
         )}
       </div>

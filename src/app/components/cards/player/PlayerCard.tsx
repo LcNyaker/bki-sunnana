@@ -38,6 +38,7 @@ const PlayerCard = ({ player }: CardProps) => {
               alt={profileImage.alt ?? player.fullName}
               fill
               className="object-cover object-top"
+              loading="lazy"
             />
           )}
         </div>

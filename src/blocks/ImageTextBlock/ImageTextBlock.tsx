@@ -55,6 +55,7 @@ export const ImageTextBlock = ({
         alt={image.alt || ''}
         width={image.width ?? 1500}
         height={image.height ?? 1000}
+        loading="lazy"
         className={clsx('h-full w-full object-cover', {
           'section-wrapper-left': !fullwidth && imageLeft,
           'section-wrapper-right': !fullwidth && !imageLeft,

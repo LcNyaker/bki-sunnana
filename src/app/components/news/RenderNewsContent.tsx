@@ -35,6 +35,7 @@ const NewsContentRenderer = ({ content }: ContentProps) => {
                     alt={image.alt || 'bild kopplad till nyhetsinnehåll'}
                     fill
                     className="object-cover rounded-md"
+                    loading="eager"
                   />
                 </div>
 

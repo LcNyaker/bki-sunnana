@@ -10,7 +10,6 @@ export const HeroBlock = ({ title, body, image }: HeroBlockType) => {
           alt={image.alt || title || 'Hero image'}
           fill
           priority
-          loading="eager"
           className="object-cover scale-105 brightness-90"
         />
       )}

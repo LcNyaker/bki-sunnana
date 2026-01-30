@@ -60,6 +60,7 @@ const UpcomingMatches = async () => {
                               alt={match.homeTeam.name}
                               fill
                               className="object-contain"
+                              loading="lazy"
                             />
                           </div>
                         )}
@@ -77,6 +78,7 @@ const UpcomingMatches = async () => {
                               alt={match.awayTeam.name}
                               fill
                               className="object-contain"
+                              loading="lazy"
                             />
                           </div>
                         )}

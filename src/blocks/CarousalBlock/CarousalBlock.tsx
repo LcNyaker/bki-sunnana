@@ -38,6 +38,7 @@ export const SponsorBlock = async () => {
                   width={140}
                   height={80}
                   className="object-contain"
+                  loading="eager"
                 />
               )}
             </a>

@@ -395,6 +395,7 @@ export interface News {
     manualName?: string | null;
   };
   published?: boolean | null;
+  publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -809,6 +810,7 @@ export interface NewsSelect<T extends boolean = true> {
         manualName?: T;
       };
   published?: T;
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

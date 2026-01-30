@@ -32,6 +32,7 @@ const VolunteerCard = ({ person }: CardProps) => {
             alt={image.alt || `Profilbild på ${person.fullName}`}
             fill
             className="object-cover object-top"
+            loading="eager"
           />
         )}
       </div>

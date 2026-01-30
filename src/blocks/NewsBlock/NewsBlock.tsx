@@ -42,6 +42,7 @@ export const NewsBlock = ({ title, undertitle, body, image, link }: NewsBlockPro
             alt={image.alt || `Bild kopplat till nyhet om ${title}`}
             fill
             className="object-cover object-top rounded-md"
+            loading="eager"
           />
         </figure>
       </div>

@@ -89,6 +89,7 @@ const TeamDisplayClient = ({ lineup }: TeamDisplayClientProps) => {
                 alt={activePlayer.images.portrait.alt}
                 fill
                 className="object-cover object-top rounded-md"
+                loading="eager"
               />
             )}
         </div>
