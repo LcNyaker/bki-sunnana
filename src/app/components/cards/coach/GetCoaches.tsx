@@ -1,6 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import CoachCardsClient from './CoachCardsClient'
+import CoachCardsList from '../../lists/CoachCardsList'
 
 const CoachCards = async () => {
   const payload = await getPayload({ config })
@@ -12,7 +12,7 @@ const CoachCards = async () => {
     sort: 'id',
   })
 
-  return <CoachCardsClient coaches={coachesRes.docs} />
+  return <CoachCardsList coaches={coachesRes.docs} />
 }
 
 export default CoachCards

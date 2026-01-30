@@ -1,5 +1,4 @@
-// app/components/blocks/VolunteersBlock.tsx
-import VolunteerCards from '@/app/components/cards/volunteer/VolunteerCards'
+import GetVolunteers from '@/app/components/cards/volunteer/GetVolunteers'
 
 type VolunteersBlockProps = {
   title?: string
@@ -19,7 +18,7 @@ export const VolunteersBlock = ({ title, description }: VolunteersBlockProps) =>
             <p className="mt-4 text-center max-w-3xl mx-auto text-gray-700">{description}</p>
           )}
         </div>
-        <VolunteerCards />
+        <GetVolunteers />
       </div>
     </section>
   )

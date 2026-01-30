@@ -1,13 +1,11 @@
-'use client'
-
-import CoachCard from './CoachCard'
+import CoachCard from '../cards/coach/CoachCard'
 import type { Coach } from '@/payload-types'
 
 type CardProps = {
   coaches: Coach[]
 }
 
-const CoachCardsClient = ({ coaches }: CardProps) => {
+const CoachCardsList = ({ coaches }: CardProps) => {
   if (!coaches.length) return null
 
   return (
@@ -25,4 +23,4 @@ const CoachCardsClient = ({ coaches }: CardProps) => {
   )
 }
 
-export default CoachCardsClient
+export default CoachCardsList

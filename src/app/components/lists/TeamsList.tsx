@@ -1,11 +1,11 @@
-import CoachCards from '@/app/components/cards/coach/CoachCards'
-import PlayerCards from '@/app/components/cards/player/PlayerCards'
+import GetCoaches from '@/app/components/cards/coach/GetCoaches'
+import GetPlayers from '@/app/components/cards/player/GetPlayers'
 
 const TeamsList = () => {
   return (
     <>
-      <PlayerCards />
-      <CoachCards />
+      <GetPlayers />
+      <GetCoaches />
     </>
   )
 }
