@@ -41,6 +41,7 @@ const NextMatchDisplay = ({ match }: NextMatchProps) => {
                 width={100}
                 height={100}
                 className="object-contain w-24 h-24"
+                loading="eager"
               />
             )}
             <span>{match.homeTeam.name}</span>
@@ -58,6 +59,7 @@ const NextMatchDisplay = ({ match }: NextMatchProps) => {
                 width={100}
                 height={100}
                 className="object-contain w-24 h-24"
+                loading="eager"
               />
             )}
             <span>{match.awayTeam.name}</span>

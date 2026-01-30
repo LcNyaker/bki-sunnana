@@ -2,7 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import PlayerCardsClient from './PlayerCardsClient'
 
-const PlayerCards = async () => {
+const GetPlayers = async () => {
   const payload = await getPayload({ config })
 
   const playersRes = await payload.find({
@@ -17,4 +17,4 @@ const PlayerCards = async () => {
   return <PlayerCardsClient players={players} />
 }
 
-export default PlayerCards
+export default GetPlayers

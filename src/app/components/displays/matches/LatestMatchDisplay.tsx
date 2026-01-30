@@ -29,6 +29,7 @@ const LatestMatchDisplay = ({ match }: LatestMatchProps) => {
               width={100}
               height={100}
               className="object-contain w-24 h-24"
+              loading="eager"
             />
           )}
           <span className="font-semibold">{match.homeTeam.name}</span>
@@ -48,6 +49,7 @@ const LatestMatchDisplay = ({ match }: LatestMatchProps) => {
               width={100}
               height={100}
               className="object-contain w-24 h-24"
+              loading="eager"
             />
           )}
           <span className="font-semibold">{match.awayTeam.name}</span>

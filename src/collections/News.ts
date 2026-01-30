@@ -176,7 +176,15 @@ export const News: CollectionConfig = {
       name: 'published',
       type: 'checkbox',
       label: 'Published?',
-      defaultValue: 'false',
+      defaultValue: false,
+    },
+    {
+      name: 'publishedAt',
+      type: 'date',
+      label: 'Published date',
+      admin: {
+        position: 'sidebar',
+      },
     },
   ],
 }

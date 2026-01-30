@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import type { Media } from '@/payload-types'
-import { EnvelopeIcon, PhoneIcon } from '@phosphor-icons/react'
+
 import type { Coach } from '@/payload-types'
 import Link from 'next/link'
+import { EnvelopeIcon, PhoneIcon } from '@phosphor-icons/react/dist/ssr'
 
 type CardProps = {
   coach: Coach
@@ -22,6 +23,7 @@ const CoachCard = ({ coach }: CardProps) => {
             alt={image?.alt || `${coach.forename} ${coach.lastname}`}
             fill
             className="object-cover object-top"
+            loading="lazy"
           />
         )}
       </div>

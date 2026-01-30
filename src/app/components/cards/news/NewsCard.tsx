@@ -24,6 +24,7 @@ export const NewsCard = ({ news }: NewsCardProps) => {
             alt={image.alt || `Bild kopplat till nyhet om ${news.title}`}
             fill
             className="object-cover object-top rounded-md"
+            loading="eager"
           />
         </figure>
       </div>

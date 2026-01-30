@@ -16,17 +16,19 @@ const MatchesPage = async () => {
 
   return (
     <main>
-      <section className="mt-10 md:mt-8 section-wrapper">
+      <section className="mt-10 md:mt-8">
         {page?.breadcrumbs && <Breadcrumbs breadcrumbs={page.breadcrumbs} />}
         {page?.layout && page.layout.length > 0 && (
-          <div>
+          <div className="section-wrapper">
             <RenderBlocks layout={page.layout} />
           </div>
         )}
-        <div className=" mb-8">
-          <h1 className="title-accent sm:col-span-2">{page.title}</h1>
+        <div className="section-wrapper">
+          <div className="mb-8">
+            <h1 className="title-accent sm:col-span-2">{page.title}</h1>
+          </div>
+          <MatchesWrapper />
         </div>
-        <MatchesWrapper />
       </section>
     </main>
   )

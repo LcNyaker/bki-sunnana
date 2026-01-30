@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import HotspotButton from '../../buttons/HotspotButton'
 import type { Media, Player } from '@/payload-types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PenguinIcon } from '@/app/assets/Icons/PenguinIcon'
 
 type TeamDisplayClientProps = {
@@ -28,6 +28,23 @@ type TeamDisplayClientProps = {
 
 const TeamDisplayClient = ({ lineup }: TeamDisplayClientProps) => {
   const [activePlayer, setActivePlayer] = useState<Player | null>(null)
+
+  useEffect(() => {
+    if (!lineup.hotspots) return
+
+    lineup.hotspots.forEach((spot) => {
+      if (typeof spot.player === 'string') return
+
+      const imageUrl =
+        typeof spot.player.images?.portrait === 'object' ? spot.player.images.portrait?.url : null
+
+      // Skapar ett osynligt img-element som laddar bilden i bakgrunden. Webbläsaren cachar bilden så den visas direkt vid hover.
+      if (imageUrl) {
+        const img = new window.Image()
+        img.src = imageUrl
+      }
+    })
+  }, [lineup.hotspots])
 
   if (typeof lineup.image === 'string') return null
   if (!lineup.image.url) return null
@@ -89,6 +106,7 @@ const TeamDisplayClient = ({ lineup }: TeamDisplayClientProps) => {
                 alt={activePlayer.images.portrait.alt}
                 fill
                 className="object-cover object-top rounded-md"
+                loading="eager"
               />
             )}
         </div>

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Media, Person } from '@/payload-types'
-import { EnvelopeIcon, PhoneIcon } from '@phosphor-icons/react'
+import { EnvelopeIcon, PhoneIcon } from '@phosphor-icons/react/dist/ssr'
 
 type CardProps = {
   person: Person
@@ -21,7 +21,7 @@ const ROLE_LABELS: Record<Person['role'], string> = {
 const VolunteerCard = ({ person }: CardProps) => {
   const image = typeof person.image === 'object' ? (person.image as Media) : null
 
-  const phoneHref = person.phone?.replace(/\s+/g, '') // Formateerar telefonnumret för href
+  const phoneHref = person.phone?.replace(/\s+/g, '') // Formaterar telefonnumret för href
 
   return (
     <div className="flex flex-col xs:flex-row items-center gap-4 border p-4 rounded-md shadow-lg shadow-black/40 overflow-hidden">
@@ -32,6 +32,7 @@ const VolunteerCard = ({ person }: CardProps) => {
             alt={image.alt || `Profilbild på ${person.fullName}`}
             fill
             className="object-cover object-top"
+            loading="eager"
           />
         )}
       </div>

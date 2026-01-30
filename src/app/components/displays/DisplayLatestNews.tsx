@@ -13,7 +13,7 @@ const DisplayLatestNews = async () => {
     where: {
       published: { equals: true },
     },
-    sort: '-createdAt',
+    sort: '-publishedAt',
     limit: 1,
     depth: 1,
   })
@@ -24,7 +24,7 @@ const DisplayLatestNews = async () => {
 
   return (
     <Link href={link} className="group block" aria-label={`Läs mer om ${latest.title}`}>
-      <div className="relative border-2 shadow-lg shadow-black/40 overflow-hidden rounded-md">
+      <div className="relative border-2 shadow-lg shadow-black/40 overflow-hidden">
         <div className="relative z-10 flex justify-center py-2 bg-white">
           <h3 className="text-lg font-semibold">{latest.title}</h3>
         </div>
@@ -37,6 +37,7 @@ const DisplayLatestNews = async () => {
                 width={image.width ?? 300}
                 height={image.height ?? 300}
                 className="object-cover object-top w-full h-full rounded-md"
+                loading="lazy"
               />
             )}
           </div>

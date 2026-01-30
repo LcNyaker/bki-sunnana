@@ -1,13 +1,11 @@
-'use client'
-
-import VolunteerCard from './VolunteerCard'
+import VolunteerCard from '../cards/volunteer/VolunteerCard'
 import type { Person } from '@/payload-types'
 
 type Props = {
   people: Person[]
 }
 
-const VolunteerCardsClient = ({ people }: Props) => {
+const VolunteerCardsList = ({ people }: Props) => {
   if (!people.length) return null
 
   return (
@@ -31,4 +29,4 @@ const VolunteerCardsClient = ({ people }: Props) => {
   )
 }
 
-export default VolunteerCardsClient
+export default VolunteerCardsList

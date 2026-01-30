@@ -1,6 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import VolunteerCardsClient from './VolunteerCardsClient'
+import VolunteerCardsList from '../../lists/VolunteerCardsList'
 
 const VolunteerCards = async () => {
   const payload = await getPayload({ config })
@@ -16,7 +16,7 @@ const VolunteerCards = async () => {
     sort: 'role',
   })
 
-  return <VolunteerCardsClient people={peopleRes.docs} />
+  return <VolunteerCardsList people={peopleRes.docs} />
 }
 
 export default VolunteerCards
